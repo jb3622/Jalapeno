@@ -1,0 +1,17 @@
+SELECT
+	IFNULL(inv.SDQTY, 0) - CASE WHEN IFNULL(adj.AEGQTY, 0) > 0 THEN IFNULL(adj.AEGQTY, 0) ELSE 0 END as StockHolding
+FROM
+	DSSETDTL inv
+	LEFT JOIN DSEUALG adj
+		ON inv.SDCLS = adj.AEGCLS
+		AND inv.SDVEN = adj.AEGVEN
+		AND  inv.SDSTY = adj.AEGSTY
+		AND inv.SDCLR = adj.AEGCLR
+		AND inv.SDSIZ = adj.AEGSIZ
+
+WHERE
+	inv.SDCLS = <class>
+	AND inv.SDVEN = <vendor>
+	AND inv.SDSTY = <style>
+	AND inv.SDCLR = <colour>
+	AND inv.SDSIZ = <size>

@@ -1,0 +1,4 @@
+DELETE
+FROM
+	DSSRSWB<member> SWB
+WHERE SWDEPT = <departmentId>

@@ -1,0 +1,49 @@
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.dll.config
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.DataLayer.dll
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.Shared.dll
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.DataLayer.pdb
+C:\Projects\iDash\BusinessLayer\bin\Release\Disney.iDash.Shared.pdb
+C:\Projects\iDash\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\iDash\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.Properties.Resources.resources
+C:\Projects\iDash\BusinessLayer\obj\Release\GenerateResource.read.1.tlog
+C:\Projects\iDash\BusinessLayer\obj\Release\GenerateResource.write.1.tlog
+C:\Projects\iDash\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.dll.config
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.DataLayer.dll
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.Shared.dll
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.DataLayer.pdb
+C:\Projects\iDash\SRR\BusinessLayer\bin\Release\Disney.iDash.Shared.pdb
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.Properties.Resources.resources
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\GenerateResource.read.1.tlog
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\GenerateResource.write.1.tlog
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\bin\Release\Disney.iDash.BusinessLayer.dll.config
+C:\Projects\iDash\bin\Release\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\bin\Release\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\bin\Release\LocalData.sdf
+C:\MyDev\bin\Release\LocalData.sdf
+C:\MyDev\bin\Release\Disney.iDash.BusinessLayer.dll.config
+C:\MyDev\bin\Release\Disney.iDash.BusinessLayer.dll
+C:\MyDev\bin\Release\Disney.iDash.BusinessLayer.pdb
+C:\MyDev\SRR\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\MyDev\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.Properties.Resources.resources
+C:\MyDev\SRR\BusinessLayer\obj\Release\GenerateResource.read.1.tlog
+C:\MyDev\SRR\BusinessLayer\obj\Release\GenerateResource.write.1.tlog
+C:\MyDev\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.dll
+C:\MyDev\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.pdb
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.Properties.Resources.resources
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\GenerateResource.read.1.tlog
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\GenerateResource.write.1.tlog
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.pdb
+C:\Dev\Visual Studio 2010\Devtip1\bin\Debug\Disney.iDash.BusinessLayer.dll.config
+C:\Dev\Visual Studio 2010\Devtip1\bin\Debug\Disney.iDash.BusinessLayer.dll
+C:\Dev\Visual Studio 2010\Devtip1\bin\Debug\Disney.iDash.BusinessLayer.pdb
+C:\Dev\Visual Studio 2010\Devtip1\SRR\BusinessLayer\obj\Release\Disney.iDash.BusinessLayer.dll

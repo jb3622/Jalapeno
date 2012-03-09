@@ -1,0 +1,37 @@
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll.config
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.pdb
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.DataLayer.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.LocalData.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.Shared.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\nunit.framework.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.DataLayer.pdb
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.LocalData.pdb
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.Shared.pdb
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\bin\x86\Debug\nunit.framework.xml
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.Properties.Resources.resources
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll
+C:\Dev\Visual Studio 2010\Spice\trunk\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll.config
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.BusinessLayer.Spice.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.DataLayer.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.LocalData.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.Shared.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\nunit.framework.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.DataLayer.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.LocalData.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\Disney.iDash.Shared.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\bin\x86\Debug\nunit.framework.xml
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.Properties.Resources.resources
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.dll
+C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer.Spice\obj\x86\Debug\Disney.iDash.BusinessLayer.Spice.pdb
+C:\TEMP\xDev\root\Spice2012\SRR\bin\Debug\Disney.iDash.BusinessLayer.Spice.dll.config
+C:\TEMP\xDev\root\Spice2012\SRR\bin\Debug\Disney.iDash.BusinessLayer.Spice.dll
+C:\TEMP\xDev\root\Spice2012\SRR\bin\Debug\Disney.iDash.BusinessLayer.Spice.pdb

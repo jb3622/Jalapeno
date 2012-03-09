@@ -1,0 +1,10 @@
+UPDATE 
+	DSITHDR
+SET 
+	DMDQT = <value>
+WHERE
+	DICLS = <class>
+	AND DIVEN = <vendor>
+	AND DISTY = <style>
+	AND DICLR = <colour>
+	AND DISIZ = <size>

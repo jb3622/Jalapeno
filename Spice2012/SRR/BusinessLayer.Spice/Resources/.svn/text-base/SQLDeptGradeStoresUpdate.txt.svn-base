@@ -1,0 +1,11 @@
+UPDATE
+	DSSRSGR
+SET
+	GDDEPT = <deptId>,
+	GDGRADE = <gradeId>,
+	GDCHGU = '<changedBy>',
+	GDCHGD = '<changedDateTime>'
+WHERE
+	GDDEPT = <originalDeptId>
+	AND GDGRADE = <originalGradeId>
+	AND GDSTR = <storeId>

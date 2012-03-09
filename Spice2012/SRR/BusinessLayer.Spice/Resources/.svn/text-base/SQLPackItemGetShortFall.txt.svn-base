@@ -1,0 +1,10 @@
+SELECT SRSTRQ FROM DSSRDTL1
+WHERE 
+	SRDEPT = <departmentId>
+	AND SRCLS = <class>
+	AND SRVEN = <vendor>
+	AND SRSTY = <style>
+	AND SRCLR = <colour>
+	AND SRSIZ = <size>
+	AND SRSTR = <store>
+	

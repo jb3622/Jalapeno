@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls
+END
+ListEditor.resx
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListEditor.resx
+END
+ListMover.resx
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListMover.resx
+END
+ListEditor.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListEditor.Designer.cs
+END
+ListEditor.cs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListEditor.cs
+END
+ListMover.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListMover.Designer.cs
+END
+ListMover.cs
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/Shared/Controls/ListMover.cs
+END

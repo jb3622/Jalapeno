@@ -1,0 +1,48 @@
+SELECT
+	m.DCTR as Market,
+	s.SSTR as Store,
+	s.SNAM as StoreName,
+	'999' as StoreGrade,
+	0 as ReleaseQty,
+	CASE WHEN i.IAUPC IS NULL THEN 0 ELSE 1 END as Allocated,
+	CASE WHEN z.IAUPC IS NULL THEN 0 ELSE 1 END as Locked
+
+FROM 
+	IPSTORE s,
+	IPSTRTB b
+	JOIN DSSTORE m
+		ON m.DSTR = s.SSTR  
+
+	LEFT JOIN DSAPPALC i
+		ON i.IASTR=s.SSTR 
+		AND i.IASTS = 'P' 
+		AND i.IAORIGIN='S' 
+		AND i.IACLS = <class>
+		AND i.IAVEN= <vendor>
+		AND i.IASTY= <style>
+		AND i.IACLR= <colour>
+		AND i.IASIZ= <size>
+
+	LEFT JOIN DSAPPALC z
+		ON i.IASTR=s.SSTR 
+		AND i.IASTS = '' 
+		AND i.IAORIGIN='S' 
+		AND i.IACLS = <class>
+		AND i.IAVEN= <vendor>
+		AND i.IASTY= <style>
+		AND i.IACLR= <colour>
+		AND i.IASIZ= <size>
+
+WHERE 
+	b.SKEY = 'USTW'
+	AND SUBSTRING(b.SARR, CAST(s.SSTR AS INTEGER), 1) = '1'
+ORDER BY
+	m.DCTR,
+	s.SSTR
+
+
+
+
+
+
+

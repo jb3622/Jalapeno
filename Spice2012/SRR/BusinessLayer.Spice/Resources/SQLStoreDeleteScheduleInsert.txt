@@ -1,0 +1,4 @@
+INSERT INTO
+	DSSRSTD1 (SDLSTS, SDLSTR, SDLDDAT, SDLUSR, SDLRDAT)
+VALUES
+	('', <storeId>, '<scheduleDate>', '<networkId>', '<lastUpdated>')

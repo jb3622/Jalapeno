@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Dev\Visual Studio 2010\Devtip11thAugust\SRR\BusinessLayer\BusinessLayer.nunit" total="3" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2011-09-01" time="10:49:58">
+  <environment nunit-version="2.5.10.11092" clr-version="2.0.50727.3623" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Program Files\NUnit 2.5.10\bin\net-2.0" machine-name="SW-GBHA-TDSD293" user="Jbrown" user-domain="EMEA" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="C:\Dev\Visual Studio 2010\Devtip11thAugust\SRR\BusinessLayer\BusinessLayer.nunit" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="C:\Dev\Visual Studio 2010\Devtip11thAugust\SRR\BusinessLayer\..\..\bin\Debug\Disney.iDash.BusinessLayer.dll" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Disney" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="iDash" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="BusinessLayer" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="ItemManagementTest" executed="True" result="Failure" success="False" time="0.172" asserts="0">
+                        <results>
+                          <test-case name="Disney.iDash.BusinessLayer.ItemManagementTest.TestAddStyle" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Disney.iDash.BusinessLayer.ItemManagementTest.TestDoSomething" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                          <test-case name="Disney.iDash.BusinessLayer.ItemManagementTest.TestThatFails" executed="True" result="Failure" success="False" time="0.125" asserts="1">
+                            <failure>
+                              <message><![CDATA[  Expected string length 8 but was 14. Strings differ at index 0.
+  Expected: "itsamess"
+  But was:  "AAAAAAAAAAAAAA"
+  -----------^
+]]></message>
+                              <stack-trace><![CDATA[at Disney.iDash.BusinessLayer.ItemManagementTest.TestThatFails() in C:\Dev\Visual Studio 2010\Devtip11thAugust\SRR\BusinessLayer\ItemManagementTest.cs:line 63
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

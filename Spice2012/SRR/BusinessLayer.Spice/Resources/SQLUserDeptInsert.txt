@@ -1,0 +1,2 @@
+INSERT INTO DSUSRDA(USDEPT, USUSPR, USIPPR, USAUTH, USCHGU, USCHGD)
+VALUES (<departmentId>, '<networkId>', '<IPID>', 10, '<changedById>', '<changedDate>')

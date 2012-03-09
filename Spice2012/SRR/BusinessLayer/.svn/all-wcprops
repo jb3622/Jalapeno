@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer
+END
+SRRDataSet.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRRDataSet.Designer.cs
+END
+Constants.cs
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/Constants.cs
+END
+SummaryItem.cs
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SummaryItem.cs
+END
+SummaryWorkbenchInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SummaryWorkbenchInfo.cs
+END
+WorkbenchExtract.cs
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/WorkbenchExtract.cs
+END
+app.config
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/app.config
+END
+SRRDataSet.xss
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRRDataSet.xss
+END
+SRR.BusinessLayer.sln
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRR.BusinessLayer.sln
+END
+BusinessBase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/BusinessBase.cs
+END
+SRR.BusinessLayer.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRR.BusinessLayer.csproj
+END
+LookupSource.cs
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/LookupSource.cs
+END
+DetailedWorkbenchInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/DetailedWorkbenchInfo.cs
+END
+StowawayStoresInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/StowawayStoresInfo.cs
+END
+SysInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SysInfo.cs
+END
+WorkbenchManualInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/WorkbenchManualInfo.cs
+END
+SystemLock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SystemLock.cs
+END
+SRR.BusinessLayer.suo
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRR.BusinessLayer.suo
+END
+StockInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/StockInfo.cs
+END
+SysInfoMessage.cs
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SysInfoMessage.cs
+END
+StockItem.cs
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/StockItem.cs
+END
+SRRDataSet.xsc
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRRDataSet.xsc
+END
+SRRDataSet.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRRDataSet.xsd
+END
+SRR.BusinessLayer.csproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/SRR.BusinessLayer.csproj.user
+END
+UserDeptInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/UserDeptInfo.cs
+END
+GiveItBack.cs
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/GiveItBack.cs
+END
+StoreGroupsCollection.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/StoreGroupsCollection.cs
+END
+StoreInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer/StoreInfo.cs
+END

@@ -1,0 +1,134 @@
+C:\Projects\SRR.New\SRR\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SRR.New\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupCombo.resources
+C:\Projects\SRR.New\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupListBox.resources
+C:\Projects\SRR.New\SRR\obj\Debug\Disney.iDash.SRR.Forms.Demo.resources
+C:\Projects\SRR.New\SRR\obj\Debug\GenerateResource.read.1.tlog
+C:\Projects\SRR.New\SRR\obj\Debug\GenerateResource.write.1.tlog
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.SRR.dll
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.SRR.pdb
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.BusinessLayer.dll
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.DataLayer.dll
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.BusinessLayer.pdb
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.DataLayer.pdb
+C:\Projects\SRR.New\SRR\obj\Debug\Disney.iDash.SRR.dll
+C:\Projects\SRR.New\SRR\obj\Debug\Disney.iDash.SRR.pdb
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.Shared.dll
+C:\Projects\SRR.New\SRR\bin\Debug\Disney.iDash.Shared.pdb
+C:\Projects\iDash\SRR\bin\Debug\LocalData.sdf
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.SRR.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.SRR.pdb
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.BaseClasses.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.BusinessLayer.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.LocalData.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.Shared.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.DataLayer.dll
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.BaseClasses.pdb
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.BusinessLayer.pdb
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.LocalData.pdb
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.Shared.pdb
+C:\Projects\iDash\SRR\bin\Debug\Disney.iDash.DataLayer.pdb
+C:\Projects\iDash\SRR\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Controls.ItemControl.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseParameters.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseForm.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.CentralPlanning.StockItemBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.CentralPlanning.StockItemEdit.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StoreLeadTimeBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.ItemPriorityBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.MinDisplayQtyBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.ItemPatternBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.UserDeptEdit.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.UserDeptBrowser.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedFocusGroups.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedParameters.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedWorkbench.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Toolbar.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.ManualAPAllocationRelease.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.SummaryWorkbench.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.WorkbenchExtract.resources
+C:\Projects\iDash\SRR\obj\Debug\GenerateResource.read.1.tlog
+C:\Projects\iDash\SRR\obj\Debug\GenerateResource.write.1.tlog
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.dll.licenses
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.dll
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.pdb
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Controls.DepartmentSelectorControl.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Controls.CriteriaSummaryControl.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupComboControl.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupListBoxControl.resources
+C:\Projects\iDash\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.StandardBrowser.resources
+C:\Projects\iDash\bin\Debug\LocalData.sdf
+C:\Projects\iDash\bin\Debug\Disney.iDash.SRR.dll.config
+C:\Projects\iDash\bin\Debug\Disney.iDash.SRR.dll
+C:\Projects\iDash\bin\Debug\Disney.iDash.SRR.pdb
+C:\Projects\iDash\SRR\SRR\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupCheckedComboControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.DepartmentSelectorControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.CriteriaSummaryControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.StockItemControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupComboControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupListBoxControl.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseParameters.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseForm.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseDataForm.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemStoreAssignment.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemStoreAssignmentEdit.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.DeptStoreGrade.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StoreDeleteSchedule.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StoreLeadTime.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemMinDisplayQty.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.UserDeptAssignment.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedFocusGroups.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedParameters.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedWorkbench.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Toolbar.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.GiveItBackConfirmation.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.StoreClassSelector.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.StowawayStores.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.SummaryWorkbench.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.WorkbenchExtract.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Properties.Resources.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\GenerateResource.read.1.tlog
+C:\Projects\iDash\SRR\SRR\obj\Debug\GenerateResource.write.1.tlog
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.dll.licenses
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.dll
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.pdb
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.WorkbenchAPPAllocationRelease.resources
+C:\Projects\iDash\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.ManualAPPAllocationRelease.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupCheckedComboControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.DepartmentSelectorControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.CriteriaSummaryControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.StockItemControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupComboControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Controls.LookupListBoxControl.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseParameters.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseForm.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Common.BaseDataForm.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemStoreAssignment.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemStoreAssignmentEdit.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.DeptStoreGrade.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StoreDeleteSchedule.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StoreLeadTime.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.StockItemMinDisplayQty.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.UserDeptAssignment.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.WorkbenchAPPAllocationRelease.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedFocusGroups.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedParameters.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.DetailedWorkbench.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Toolbar.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.GiveItBackConfirmation.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.ManualAPPAllocationRelease.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.StoreClassSelector.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.StowawayStores.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Workbench.SummaryWorkbench.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Forms.Maintenance.WorkbenchExtract.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.Properties.Resources.resources
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\GenerateResource.read.1.tlog
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\GenerateResource.write.1.tlog
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.dll.licenses
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.dll
+C:\Dev\Visual Studio 2010\Devtip\SRR\SRR\obj\Debug\Disney.iDash.SRR.pdb
+C:\Dev\Visual Studio 2010\Devtip\bin\Debug\LocalData.sdf
+C:\Dev\Visual Studio 2010\Devtip\bin\Debug\Disney.iDash.SRR.dll.config
+C:\Dev\Visual Studio 2010\Devtip\bin\Debug\Disney.iDash.SRR.dll
+C:\Dev\Visual Studio 2010\Devtip\bin\Debug\Disney.iDash.SRR.pdb

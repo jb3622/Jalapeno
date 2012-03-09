@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice
+END
+Constants.cs
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/Constants.cs
+END
+app.config.bak
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/app.config.bak
+END
+DataSources.cs
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/DataSources.cs
+END
+User.cs
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/User.cs
+END
+DB2Environments.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/DB2Environments.cs
+END
+BusinessLayer.nunit
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.nunit
+END
+app.config
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/app.config
+END
+BusinessLayer.Spice.sln
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.Spice.sln
+END
+BusinessLayer.Spice.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.Spice.csproj
+END
+BusinessLayer.VisualState.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.VisualState.xml
+END
+ItemBase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/ItemBase.cs
+END
+DetailedItem.cs
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/DetailedItem.cs
+END
+ItemManagementTest.cs
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/ItemManagementTest.cs
+END
+ItemManagement.cs
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/ItemManagement.cs
+END
+BusinessLayer.Spice.suo
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.Spice.suo
+END
+Settings.cs
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/Settings.cs
+END
+BusinessLayer.Spice.csproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/BusinessLayer.Spice.csproj.user
+END
+DB2SampleData.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/DB2SampleData.cs
+END
+Enumerators.cs
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/Enumerators.cs
+END
+TestResult.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/SRR/BusinessLayer.Spice/TestResult.xml
+END

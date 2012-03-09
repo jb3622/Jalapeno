@@ -1,0 +1,9 @@
+
+UPDATE DSSRSTD1
+SET 
+	SDLSTR = <storeId>,
+	SDLDDAT = '<scheduleDate>',
+	SDLUSR = '<networkId>',
+	SDLRDAT = '<lastUpdated>'
+WHERE
+	SDLSTR = <oldStoreId>

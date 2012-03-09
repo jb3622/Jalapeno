@@ -1,0 +1,23 @@
+SELECT 
+	IAMKT As Market,
+	IASTR As Store,
+	IASTRDSC As StoreName,
+	IAGRADE As StoreGrade,
+	IASYSQTY As Quantity,
+	IARLSQTY As ReleaseQty,
+	IASRRUNT as AdditionalUnits,
+	0 As ReleaseStore,
+	IACSEQ As ContinentalSeq
+FROM
+	DSAPPALC
+WHERE
+	IASTS = ''
+	AND IAORIGIN = 'S'
+	AND IACLS = <class>
+	AND IAVEN = <vendor>
+	AND IASTY = <style>
+	AND IACLR = <colour>
+	AND IASIZ = <size>
+ORDER BY
+	IAMKT,
+	IASTR

@@ -1,0 +1,4 @@
+INSERT INTO DSIALOK
+	(IACLS, IAVEN, IASTY, IACLR, IASIZ, IAUSER, IAFGP, IAJOB, IADTTM)
+VALUES
+	(<class>, <vendor>, <style>, <colour>, <size>, <user>, 0, <job>, <dateTime>)

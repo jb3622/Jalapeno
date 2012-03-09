@@ -1,0 +1,8 @@
+SELECT IMLT
+FROM IPITHDR
+WHERE 
+	ICLS = <class>
+	AND IVEN = <vendor>
+	AND ISTY = <style>
+	AND ICLR = <colour>
+	AND ISIZ = <size>
