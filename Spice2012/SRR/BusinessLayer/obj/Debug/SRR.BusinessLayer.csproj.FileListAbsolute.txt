@@ -58,3 +58,13 @@ C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer\obj\Debug\GenerateResource.read.1.
 C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer\obj\Debug\GenerateResource.write.1.tlog
 C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer\obj\Debug\Disney.iDash.SRR.BusinessLayer.dll
 C:\TEMP\xDev\root\Spice2012\SRR\BusinessLayer\obj\Debug\Disney.iDash.SRR.BusinessLayer.pdb
+C:\Spice2012\Spice2012\bin\Debug\LocalData.sdf
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.SRR.BusinessLayer.dll.config
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.SRR.BusinessLayer.dll
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.SRR.BusinessLayer.pdb
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\Disney.iDash.SRR.BusinessLayer.Properties.Resources.resources
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\GenerateResource.read.1.tlog
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\GenerateResource.write.1.tlog
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\Disney.iDash.SRR.BusinessLayer.dll
+C:\Spice2012\Spice2012\SRR\BusinessLayer\obj\Debug\Disney.iDash.SRR.BusinessLayer.pdb

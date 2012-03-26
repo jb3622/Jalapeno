@@ -1,14 +1,14 @@
 10
 
 dir
-1027
-http://su-gblo-mddb90.emea.wdpr.disney.com:3690/svn/idash/Visual%20Studio%202010/Spice/trunk/BaseClasses
+991
+http://su-gblo-mddb90.emea.wdpr.disney.com:3690/svn/idash/Visual%20Studio%202010/iDash/branches/devintegration/BaseClasses
 http://su-gblo-mddb90.emea.wdpr.disney.com:3690/svn/idash
 
 
 
-2012-01-13T16:32:06.348846Z
-1021
+2011-12-05T11:56:38.910444Z
+973
 jbrown
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2012-01-13T16:55:17.137434Z
+2011-12-14T13:27:28.612165Z
 aac6884e2f00d3b404a53c6e973950a4
-2012-01-13T16:32:06.348846Z
-1021
+2011-11-21T10:34:39.653733Z
+930
 jbrown
 
 
@@ -66,10 +66,10 @@ file
 
 
 
-2012-01-13T16:55:17.137434Z
+2011-12-14T13:27:28.627789Z
 d9e43730828eb83f50012e6268d268fa
-2012-01-13T16:32:06.348846Z
-1021
+2011-11-21T10:34:39.653733Z
+930
 jbrown
 
 
@@ -103,10 +103,10 @@ file
 
 
 
-2012-01-13T16:55:17.153054Z
-2b80ec9e691f204c06cd40259f840566
-2012-01-13T16:32:06.348846Z
-1021
+2012-01-13T16:33:30.472919Z
+8db58365198f7ffeae3f7317e6ae7fe7
+2011-11-21T10:34:39.653733Z
+930
 jbrown
 
 
@@ -129,7 +129,7 @@ jbrown
 
 
 
-9919
+9858
 
 obj
 dir

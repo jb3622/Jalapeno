@@ -19,3 +19,10 @@ C:\TEMP\xDev\root\Spice2012\bin\Debug\Disney.iDash.LocalData.pdb
 C:\TEMP\xDev\root\Spice2012\LocalData\obj\Debug\ResolveAssemblyReference.cache
 C:\TEMP\xDev\root\Spice2012\LocalData\obj\Debug\Disney.iDash.LocalData.dll
 C:\TEMP\xDev\root\Spice2012\LocalData\obj\Debug\Disney.iDash.LocalData.pdb
+C:\Spice2012\Spice2012\bin\Debug\LocalData.sdf
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.LocalData.dll.config
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.LocalData.dll
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.LocalData.pdb
+C:\Spice2012\Spice2012\LocalData\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice2012\Spice2012\LocalData\obj\Debug\Disney.iDash.LocalData.dll
+C:\Spice2012\Spice2012\LocalData\obj\Debug\Disney.iDash.LocalData.pdb

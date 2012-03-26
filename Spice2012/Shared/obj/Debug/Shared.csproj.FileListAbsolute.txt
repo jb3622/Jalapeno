@@ -37,3 +37,16 @@ C:\TEMP\xDev\root\Spice2012\Shared\obj\Debug\GenerateResource.read.1.tlog
 C:\TEMP\xDev\root\Spice2012\Shared\obj\Debug\GenerateResource.write.1.tlog
 C:\TEMP\xDev\root\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.dll
 C:\TEMP\xDev\root\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.pdb
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.Shared.dll.config
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.Shared.dll
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.Shared.pdb
+C:\Spice2012\Spice2012\Shared\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.Controls.ListEditor.resources
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.Forms.CustomDialog.resources
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.Forms.ErrorDialogForm.resources
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.Controls.ListMover.resources
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.Properties.Resources.resources
+C:\Spice2012\Spice2012\Shared\obj\Debug\GenerateResource.read.1.tlog
+C:\Spice2012\Spice2012\Shared\obj\Debug\GenerateResource.write.1.tlog
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.dll
+C:\Spice2012\Spice2012\Shared\obj\Debug\Disney.iDash.Shared.pdb

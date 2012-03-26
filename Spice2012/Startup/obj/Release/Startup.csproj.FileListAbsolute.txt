@@ -148,3 +148,6 @@ C:\Dev\Visual Studio 2010\Spice\trunk\Startup\obj\Release\GenerateResource.write
 C:\Dev\Visual Studio 2010\Spice\trunk\Startup\obj\Release\iDash.TrustInfo.xml
 C:\Dev\Visual Studio 2010\Spice\trunk\Startup\obj\Release\iDash.exe.manifest
 C:\Dev\Visual Studio 2010\Spice\trunk\Startup\obj\Release\iDash.application
+C:\Spice2012\Spice2012\bin\Release\iDash.exe.config
+C:\Spice2012\Spice2012\Startup\obj\Release\iDash.exe
+C:\Spice2012\Spice2012\Startup\obj\Release\iDash.pdb

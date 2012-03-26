@@ -25,3 +25,12 @@ C:\TEMP\xDev\root\Spice2012\DataLayer\obj\Debug\GenerateResource.read.1.tlog
 C:\TEMP\xDev\root\Spice2012\DataLayer\obj\Debug\GenerateResource.write.1.tlog
 C:\TEMP\xDev\root\Spice2012\DataLayer\obj\Debug\Disney.iDash.DataLayer.dll
 C:\TEMP\xDev\root\Spice2012\DataLayer\obj\Debug\Disney.iDash.DataLayer.pdb
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.DataLayer.dll.config
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.DataLayer.dll
+C:\Spice2012\Spice2012\bin\Debug\Disney.iDash.DataLayer.pdb
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\Disney.iDash.DataLayer.Properties.Resources.resources
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\GenerateResource.read.1.tlog
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\GenerateResource.write.1.tlog
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\Disney.iDash.DataLayer.dll
+C:\Spice2012\Spice2012\DataLayer\obj\Debug\Disney.iDash.DataLayer.pdb

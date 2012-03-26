@@ -128,6 +128,10 @@
     <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Disney.iDash.BaseClasses, Version=2.16.1109.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\Disney.iDash.BaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="Disney.iDash.Shared, Version=2.16.1109.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\Disney.iDash.Shared.dll</HintPath>
@@ -440,10 +444,6 @@
     <Content Include="Resources\Workbench Extract.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BaseClasses\BaseClasses.csproj">
-      <Project>{1CA377F4-1956-461B-A2F6-24DD8DB623D6}</Project>
-      <Name>BaseClasses</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
       <Project>{7A1584F6-B262-40DF-8B18-58E74E473D06}</Project>
       <Name>DataLayer</Name>

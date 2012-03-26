@@ -77,6 +77,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\DevExpress 2011.1\Components\Sources\DevExpress.DLL\DevExpress.XtraTreeList.v11.1.dll</HintPath>
     </Reference>
+    <Reference Include="Disney.iDash.BaseClasses, Version=2.16.1109.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\Disney.iDash.BaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="Disney.iDash.BusinessLayer.Spice, Version=1.0.4393.19738, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\Disney.iDash.BusinessLayer.Spice.dll</HintPath>
@@ -372,12 +376,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Maintenance\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BaseClasses\BaseClasses.csproj">
-      <Project>{1CA377F4-1956-461B-A2F6-24DD8DB623D6}</Project>
-      <Name>BaseClasses</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

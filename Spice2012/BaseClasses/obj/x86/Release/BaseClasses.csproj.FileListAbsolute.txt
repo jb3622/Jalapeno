@@ -1,0 +1,8 @@
+C:\Spice2012\Spice2012\BaseClasses\bin\x86\Release\Disney.iDash.BaseClasses.dll
+C:\Spice2012\Spice2012\BaseClasses\bin\x86\Release\Disney.iDash.BaseClasses.pdb
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\Disney.iDash.BaseClasses.Forms.AddinMenu.resources
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\Disney.iDash.BaseClasses.dll
+C:\Spice2012\Spice2012\BaseClasses\obj\x86\Release\Disney.iDash.BaseClasses.pdb

@@ -1,23 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
-V 77
-/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/BaseClasses/Forms
+V 94
+/svn/idash/!svn/ver/941/Visual%20Studio%202010/iDash/branches/devintegration/BaseClasses/Forms
 END
 AddinMenu.resx
 K 25
 svn:wc:ra_dav:version-url
-V 92
-/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/BaseClasses/Forms/AddinMenu.resx
+V 109
+/svn/idash/!svn/ver/941/Visual%20Studio%202010/iDash/branches/devintegration/BaseClasses/Forms/AddinMenu.resx
 END
 AddinMenu.designer.cs
 K 25
 svn:wc:ra_dav:version-url
-V 99
-/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/BaseClasses/Forms/AddinMenu.designer.cs
+V 116
+/svn/idash/!svn/ver/941/Visual%20Studio%202010/iDash/branches/devintegration/BaseClasses/Forms/AddinMenu.designer.cs
 END
 AddinMenu.cs
 K 25
 svn:wc:ra_dav:version-url
-V 90
-/svn/idash/!svn/ver/1021/Visual%20Studio%202010/Spice/trunk/BaseClasses/Forms/AddinMenu.cs
+V 107
+/svn/idash/!svn/ver/941/Visual%20Studio%202010/iDash/branches/devintegration/BaseClasses/Forms/AddinMenu.cs
 END
