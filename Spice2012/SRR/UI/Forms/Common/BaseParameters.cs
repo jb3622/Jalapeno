@@ -17,10 +17,10 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 {
     public partial class BaseParameters : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+
         private DetailedWorkbenchInfo _instance = new DetailedWorkbenchInfo();
         private Type _parentFormType = null;
         private bool _dirty = false;
-        public bool ExitAllowed { get; set; }
         private bool _hasErrors = false;
 
         public BaseParameters()
@@ -41,8 +41,6 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 				{
 					this.IsDirty = _instance.IsDirty;
 				});
-
-            ExitAllowed = true;
         }
 
 		public bool Setup()
@@ -62,7 +60,7 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 
         public void ClearStatusMessage()
         {
-            if (this.InvokeRequired || this.StatusBar.InvokeRequired)
+			if (this.InvokeRequired)
 			{
 				MethodInvoker mi = delegate { ClearStatusMessage(); };
 				this.Invoke(mi);
@@ -76,7 +74,7 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 
         public void UpdateStatusMessage(string message = "", bool error = false)
         {
-            if (this.InvokeRequired || this.StatusBar.InvokeRequired)
+			if (this.InvokeRequired)
 			{
 				MethodInvoker mi = delegate { UpdateStatusMessage(message, error); };
 				this.Invoke(mi);
@@ -97,7 +95,7 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 
         public void UpdateProgress(string message, int percentageComplete = 0)
         {
-            if (this.InvokeRequired || this.StatusBar.InvokeRequired)
+			if (this.InvokeRequired)
 			{
 				MethodInvoker mi = delegate { UpdateProgress(message, percentageComplete); };
 				this.Invoke(mi);
@@ -218,33 +216,30 @@ namespace Disney.iDash.SRR.UI.Forms.Common
         {
             var proceed = true;
 
-            if (this.ExitAllowed)
-            {
-                if (this.IsDirty)
-                    switch (ConfirmQuit())
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-                            if (this.Instance.ApplyChanges())
-                            {
-                                this.IsDirty = false;
-                                proceed = true;
-                            }
-                            break;
+			if (this.IsDirty)
+				switch (ConfirmQuit())
+				{
+					case System.Windows.Forms.DialogResult.Yes:
+						if (this.Instance.ApplyChanges())
+						{
+							this.IsDirty = false;
+							proceed = true;
+						}
+						break;
 
-                        case System.Windows.Forms.DialogResult.No:
-                            this.Instance.DiscardChanges();
-                            this.IsDirty = false;
-                            proceed = true;
-                            break;
+					case System.Windows.Forms.DialogResult.No:
+						this.Instance.DiscardChanges();
+						this.IsDirty = false;
+						proceed = true;
+						break;
 
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            proceed = false;
-                            break;
-                    }
-                else
-                    // Always unlock items even if nothing changed to ensure we remove any filegroups.
-                    this.Instance.ReleaseLocks();
-            }
+					case System.Windows.Forms.DialogResult.Cancel:
+						proceed = false;
+						break;
+				}
+			else
+				// Always unlock items even if nothing changed to ensure we remove any filegroups.
+				this.Instance.ReleaseLocks();
 
             return proceed;
         }
@@ -256,7 +251,7 @@ namespace Disney.iDash.SRR.UI.Forms.Common
 
         private void BaseParameters_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!this.DesignMode && this.ExitAllowed)
+            if (!this.DesignMode)
             {
                 if (FormUtils.TagContains(this, "ForceClose"))
                    this.IsDirty = false;

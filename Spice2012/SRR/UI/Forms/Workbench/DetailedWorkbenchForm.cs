@@ -14,8 +14,6 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using Disney.iDash.SRR.BusinessLayer;
 using Disney.iDash.Shared;
-using System.IO;
-
 
 namespace Disney.iDash.SRR.UI.Forms.Workbench
 {
@@ -24,25 +22,18 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         private CellHighlighter _highlights = new CellHighlighter();
         private bool _editMode = false;
 		private const string kGridRegistryKey = "DetailedWorkbench.";
-
+		private bool _allowExit = true;
+        private bool _cellChanging = false;
         private bool _giveItBackChanged = false;
-
-        private BackgroundWorker _bwSwitchLevel = null;
-        private BackgroundWorker _bwSearch = null;
-        private BackgroundWorker _bwRunModel = null;
-        private BackgroundWorker _bwApply = null;
-        private bool _cellsChanging = false;
-        private bool _updatingCells = false;
         
+        private BackgroundWorker _bwSearch = null;
+
         #region Public methods and functions
         //-----------------------------------------------------------------------------------------
         public DetailedWorkbenchForm(bool editMode = false)
         {
             InitializeComponent();
-            #pragma warning disable 618
-            DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true;
-            #pragma warning restore 618
-
+						
 			viewLevers.Appearance.OddRow.BackColor = Properties.Settings.Default.OddRowBackColor;
             viewLevers.Appearance.EvenRow.BackColor = Properties.Settings.Default.EvenRowBackColor;
 			viewLevers.Appearance.FocusedRow.BackColor = Properties.Settings.Default.FocusedRowBackColor;
@@ -52,8 +43,8 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
             this.MdiParent = FormUtils.FindMdiParent();
             EditMode = editMode;
-        }
 
+        }
 
         public override void ShowDetailedForm(DetailedWorkbenchInfo WBDetailedInfo)
         {
@@ -105,171 +96,83 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                 base.ShowParentForm();
             }
         }
-                
+
         private void btnApply_Click(object sender, EventArgs e)
-        {                
+        {
+			var ok = false;
+			var buttonState = new ControlStateCollection();
+
             if (Question.YesNo("Are you sure you want to apply changes to these levers?", this.Text))
-            {
-                ApplyChanges(true);
-            }
-        }
-
-        private bool ApplyChanges(bool runInBackground)
-        {
-            lock (this)
-            {
-                var ok = false;
-                var buttonState = new ControlStateCollection();
-
-                viewLevers.PostEditor();
-                viewLevers.UpdateCurrentRow();
-
-                buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                buttonState.Disable();
-
-                this.Cursor = Cursors.WaitCursor;
-                Application.DoEvents();
-                base.ExitAllowed = false;
-
-                if (runInBackground)
-                {
-                    if (_bwApply == null)
-                    {
-                        _bwApply = new BackgroundWorker();
-                        _bwApply.DoWork += ((sender1, e1) =>
-                        {
-                            base.Instance._giveItBackChanged = _giveItBackChanged;
-                            ok = base.Instance.ApplyChanges(useTransactions: false);
-                            _giveItBackChanged = false;
-                            base.Instance._giveItBackChanged = false;
-                        });
-
-                        _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                        {
-                            this.Cursor = Cursors.Default;
-                            buttonState.RestoreState();
-                            base.ExitAllowed = true;
-
-                            if (ok)
-                            {
-                                base.IsDirty = false;
-                                this.Close();
-                                base.ShowParentForm();
-                            }
-                        });
-                    }
-
-                    _bwApply.RunWorkerAsync();
-                }
-                else
-                {
-                    ok = base.Instance.ApplyChanges(useTransactions: true);
-                    this.Cursor = Cursors.Default;
-                    buttonState.RestoreState();
-                    base.ExitAllowed = true;
-
-                    if (ok)
-                    {
-                        base.IsDirty = false;
-                        this.Close();
-                        base.ShowParentForm();
-                    }
-
-                    this.Cursor = Cursors.Default;
-                    buttonState.RestoreState();
-                    base.ExitAllowed = true;
-                }
-                return ok;
-            }
-		}
-
-                
-        private void btnModelRun_Click(object sender, EventArgs e)
-        {
-            if (Question.YesNo("Commence the Model Run?", this.Text))
-            {
-                try
-                {
-                    RunModel(true); 
-                }
-                catch (Exception ex)
-                {
-                    this.Cursor = Cursors.Default;
-                    MessageBox.Show(ex.Message, "Model Run - error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }                      
-            }
-        }
-
-        private bool RunModel(bool runInBackground)
-        {
-            lock (this)
-            {
-                var ok = false;
-                var buttonState = new ControlStateCollection();
-
+			{
                 viewLevers.CloseEditor();
                 viewLevers.UpdateCurrentRow();
 
-                buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                buttonState.Disable();
-                this.Cursor = Cursors.WaitCursor;
-                Application.DoEvents();
-                base.ExitAllowed = false;
+				buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
+				buttonState.Disable();
+				_allowExit = false;
 
-                if (runInBackground)
-                {
-                    if (_bwRunModel == null)
-                    {
-                        _bwRunModel = new BackgroundWorker();
-                        base.Instance._giveItBackChanged = _giveItBackChanged;
-                        _bwRunModel.DoWork += ((sender1, e1) =>
-                        {
-                            ok = base.Instance.RunModel(applyChanges: false, useTransactions: false);
-                        });
+				this.Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
 
-                        _bwRunModel.RunWorkerCompleted += ((sender1, e1) =>
-                        {
-                            _giveItBackChanged = false;
-                            base.Instance._giveItBackChanged = false;
-                            this.Cursor = Cursors.Default;
-                            buttonState.RestoreState();
-                            base.ExitAllowed = true;
+                base.Instance._giveItBackChanged = _giveItBackChanged;
+                ok = base.Instance.ApplyChanges();
+                _giveItBackChanged = false;
+                base.Instance._giveItBackChanged = false;
 
-                            if (ok)
-                            {
-                                gridLevers.RefreshDataSource();
-
-                                if (base.Instance.GetGiveItBackItems.Count() > 0)
-                                {
-                                    var frm = new GiveItBackConfirmationDialog();
-                                    frm.ShowForm(base.Instance.GetGiveItBackItems);
-                                }
-                            }
-                        });
-                    }
-                    _bwRunModel.RunWorkerAsync();
-                }
-                else
-                {
-                    ok = base.Instance.RunModel(applyChanges: false, useTransactions: true);
-
-                    this.Cursor = Cursors.Default;
-                    buttonState.RestoreState();
-                    base.ExitAllowed = true;
-
-                    if (ok)
-                    {
-                        gridLevers.RefreshDataSource();
-
-                        if (base.Instance.GetGiveItBackItems.Count() > 0)
-                        {
-                            var frm = new GiveItBackConfirmationDialog();
-                            frm.ShowForm(base.Instance.GetGiveItBackItems);
-                        }
-                    }
-                }
-                return ok;
+				this.Cursor = Cursors.Default;
+				
+				buttonState.RestoreState();
+				_allowExit = true; 
+				
+				if (ok)
+				{
+					base.IsDirty = false;
+					this.Close();
+					base.ShowParentForm();
+				}
             }
+			
+		}
+
+        private void btnModelRun_Click(object sender, EventArgs e)
+        {
+			var ok = false;
+			var buttonState = new ControlStateCollection();
+
+			if (Question.YesNo("Commence the Model Run?", this.Text))
+			{
+                viewLevers.CloseEditor();
+                viewLevers.UpdateCurrentRow();
+
+				buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
+				buttonState.Disable();
+				_allowExit = false;
+
+				this.Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+
+                base.Instance._giveItBackChanged = _giveItBackChanged;
+                ok = base.Instance.RunModel();
+  
+                _giveItBackChanged = false;
+                base.Instance._giveItBackChanged = false;
+
+				this.Cursor = Cursors.Default;
+
+				buttonState.RestoreState();
+				_allowExit = true;
+
+				if (ok)
+				{
+					gridLevers.RefreshDataSource();
+
+					if (base.Instance.GetGiveItBackItems.Count() > 0)
+					{
+						var frm = new GiveItBackConfirmationDialog();
+						frm.ShowForm(base.Instance.GetGiveItBackItems);
+					}
+				}
+			}
         }
 
         private void btnHide_Click(object sender, EventArgs e)
@@ -385,38 +288,13 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
         private void viewLevers_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            string statusMsg = String.Empty;
-            object newCellValue = null;
-
-            try
+            if (this.Visible)
             {
-                if (!_updatingCells)
-                {
-                    switch (viewLevers.FocusedColumn.FieldName)
-                    {
-                        case DetailedWorkbenchInfo.colNewAllocFlag:
-                            GetNewCellValue("ALLOCFLAG", e.Value, out newCellValue, "YN ".Contains((e.Value ?? string.Empty).ToString()), "Only Y or N permitted");                      
-                            
-                            break;
+                _highlights.CellValueChanged(viewLevers, e);
+                if (e.Column.FieldName == DetailedWorkbenchInfo.colNewSmoothingFactor)
+                    _highlights.CellValueChanged(viewLevers, e, "col" + DetailedWorkbenchInfo.colNewSmoothedRateOfSale);
 
-                    }
-                }
-
-                if (this.Visible)
-                {
-                    _highlights.CellValueChanged(viewLevers, e);
-                    if (e.Column.FieldName == DetailedWorkbenchInfo.colNewSmoothingFactor)
-                        _highlights.CellValueChanged(viewLevers, e, "col" + DetailedWorkbenchInfo.colNewSmoothedRateOfSale);
-
-                    IsDirty = true;
-                }
-            }
-            catch (Exception)
-            {               
-            }
-            finally
-            {
-                _cellsChanging = false;
+                IsDirty = true;
             }
         }
 
@@ -506,47 +384,42 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 		private void viewLevers_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
 		{
             string statusMsg = String.Empty;
-            object newCellValue = null;
 
-            switch (viewLevers.FocusedColumn.FieldName)
-            {
-                case DetailedWorkbenchInfo.colGiveItBack:
-                    if (e.Value == null || e.Value.ToString() == string.Empty || "YN".Contains(e.Value.ToString()) == false)
-                    {
-                        e.Valid = false;
-                        e.ErrorText = "Only Y or N permitted";
-                    }
-                    break;
+			switch (viewLevers.FocusedColumn.FieldName)
+			{				
+				case DetailedWorkbenchInfo.colGiveItBack:
+					if (e.Value == null || e.Value.ToString() == string.Empty || "YN".Contains(e.Value.ToString()) == false)
+					{
+						e.Valid = false;
+						e.ErrorText = "Only Y or N permitted";
+					}
+					break;
 
-                case DetailedWorkbenchInfo.colNewCutOff:
-                    GetNewCellValue("CUTOFF", e.Value, out newCellValue, CheckRange(e.Value, 0.00m, 99.99m), "Valid range is: 0.00 to 99.999");
-                    break;
+				case DetailedWorkbenchInfo.colNewPattern:
+					var storeType = viewLevers.GetFocusedRowCellValue(DetailedWorkbenchInfo.colStoreType).ToString();
+					if (storeType == Constants.kOnline)
+						UpdateCells("PATTERN", e, CheckRange(e.Value, 0, 99), "Valid range is: 0 to 99");
+					else
+						UpdateCells("PATTERN", e, CheckRange(e.Value, 100, 999), "Valid range is: 100 to 999");
+					break;
 
-                case DetailedWorkbenchInfo.colNewPattern:
-                    var storeType = viewLevers.GetFocusedRowCellValue(DetailedWorkbenchInfo.colStoreType).ToString();
-                    if (storeType == Constants.kOnline)
-                    {
-                        GetNewCellValue("PATTERN", e.Value, out newCellValue, CheckRange(e.Value, 0, 99), "Valid range is: 0 to 99");
-                    }
-                    else
-                    {
-                        GetNewCellValue("PATTERN", e.Value, out newCellValue, CheckRange(e.Value, 100, 999), "Valid range is: 100 to 999");
-                    }
-                    break;
+				case DetailedWorkbenchInfo.colNewUpliftFactor:
+					UpdateCells("UPLIFT", e, CheckRange(e.Value, 0.01m, 9.99m), "Valid range is: 0.01 to 9.99");
+					break;
 
-                case DetailedWorkbenchInfo.colNewUpliftFactor:
-                    GetNewCellValue("UPLIFT", e.Value, out newCellValue, CheckRange(e.Value, 0.01m, 9.99m), "Valid range is: 0.01 to 9.99");
-                    break;
+				case DetailedWorkbenchInfo.colNewCutOff:
+					UpdateCells("CUTOFF", e, CheckRange(e.Value, 0.00m, 99.99m), "Valid range is: 0.00 to 99.999");
+					break;
 
-                case DetailedWorkbenchInfo.colNewSmoothingFactor:
-                    GetNewCellValue("SMOOTHINGFACTOR", e.Value, out newCellValue, CheckRange(e.Value, 0m, 1m), "Valid range is: 0 to 1");
-                    break;               
-            }
+				case DetailedWorkbenchInfo.colNewAllocFlag:
+					UpdateCells("ALLOCFLAG", e, "YN ".Contains((e.Value ?? string.Empty).ToString()), "Only Y or N permitted");
+					break;
 
-            if (newCellValue != null)
-            {
-                e.Value = newCellValue;
-            }
+				case DetailedWorkbenchInfo.colNewSmoothingFactor:
+					UpdateCells("SMOOTHINGFACTOR", e, CheckRange(e.Value, 0m, 1m), "Valid range is: 0 to 1");
+					break;
+
+			}
 		}
 
 		/// Blank out the existing Y or N before updating the contents to ensure the field registers a change event.
@@ -597,7 +470,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
         private void DetailedWorkbench_FormClosing(object sender, FormClosingEventArgs e)
         {
-			if (base.ExitAllowed)
+			if (_allowExit)
 			{
 				if (!e.Cancel)
 				{
@@ -616,935 +489,47 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
         private void mnuStyleLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        this.Cursor = Cursors.Default;
-                                        base.ExitAllowed = true;                                        
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            } 
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleLevel);
         }
 
         private void mnuStyleMarketLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleMarketLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleMarketLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleMarketLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleMarketLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleMarketLevel);
         }
 
         private void mnuStyleGradeLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleGradeLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-                            base.ExitAllowed = false;
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleGradeLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleGradeLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleGradeLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleGradeLevel);
         }
 
         private void mnuStyleStoreLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleStoreLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-                                base.ExitAllowed = true;
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleStoreLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleStoreLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleStoreLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.StyleStoreLevel);
         }
 
         private void mnuItemLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-                                base.ExitAllowed = true;
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemLevel);
         }
 
         private void mnuItemMarketLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemMarketLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-                                base.ExitAllowed = true;
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemMarketLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemMarketLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemMarketLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemMarketLevel);
         }
 
         private void mnuItemGradeLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemGradeLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-                                base.ExitAllowed = true;
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemGradeLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemGradeLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemGradeLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemGradeLevel);
         }
 
         private void mnuItemStoreLevel_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemStoreLevel);
-            var ok = false;
-            var buttonState = new ControlStateCollection();
-            var switchLevel = false;
-            var curParameter = base.Instance.Parameter;
-
-            base.ExitAllowed = false;
-
-            try
-            {
-                if (IsDirty)
-                {
-                    switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-                    {
-                        case System.Windows.Forms.DialogResult.Yes:
-
-                            viewLevers.CloseEditor();
-                            viewLevers.UpdateCurrentRow();
-
-                            buttonState.SaveState(btnEdit, btnModelRun, btnApply, btnBack, btnExit);
-                            buttonState.Disable();
-
-                            this.Cursor = Cursors.WaitCursor;
-                            Application.DoEvents();
-
-                            _bwApply = new BackgroundWorker();
-                            _bwApply.DoWork += ((sender1, e1) =>
-                            {
-                                base.Instance._giveItBackChanged = _giveItBackChanged;
-                                switchLevel = base.Instance.ApplyChanges(useTransactions: false);
-                                _giveItBackChanged = false;
-                                base.Instance._giveItBackChanged = false;
-                            });
-
-                            _bwApply.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                this.Cursor = Cursors.Default;
-                                buttonState.RestoreState();
-                                base.ExitAllowed = true;
-
-                                if (switchLevel)
-                                {
-                                    base.IsDirty = false;
-                                    _bwSwitchLevel = new BackgroundWorker();
-                                    _bwSwitchLevel.DoWork += ((sender2, e2) =>
-                                    {
-                                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemStoreLevel);
-                                    });
-
-                                    _bwSwitchLevel.RunWorkerCompleted += ((sender2, e2) =>
-                                    {
-                                        RefreshGrid(true, curParameter);
-                                        base.ExitAllowed = true;
-                                        this.Cursor = Cursors.Default;
-                                    });
-                                    _bwSwitchLevel.RunWorkerAsync();
-                                }
-                            });
-                            _bwApply.RunWorkerAsync();
-
-                            break;
-
-                        case System.Windows.Forms.DialogResult.No:
-
-                            base.Instance.DiscardChanges();
-                            _bwSwitchLevel = new BackgroundWorker();
-                            _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                            {
-                                SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemStoreLevel);
-                            });
-
-                            _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                            {
-                                RefreshGrid(true, curParameter);
-                                base.ExitAllowed = true;
-                                this.Cursor = Cursors.Default;
-                            });
-                            _bwSwitchLevel.RunWorkerAsync();
-                            break;
-
-                        case System.Windows.Forms.DialogResult.Cancel:
-                            switchLevel = false;
-                            return;
-                            break;
-                    }
-                }
-                else
-                {
-                    _bwSwitchLevel = new BackgroundWorker();
-                    _bwSwitchLevel.DoWork += ((sender1, e1) =>
-                    {
-                        SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemStoreLevel);
-                    });
-
-                    _bwSwitchLevel.RunWorkerCompleted += ((sender1, e1) =>
-                    {
-                        RefreshGrid(true, curParameter);
-                        base.ExitAllowed = true;
-                        this.Cursor = Cursors.Default;
-                    });
-                    _bwSwitchLevel.RunWorkerAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                base.ExitAllowed = true;
-                this.Cursor = Cursors.Default;
-            }
-            finally
-            {
-                //base.ExitAllowed = true;                
-            }  
+            SwitchLevel(BusinessLayer.DetailedWorkbenchInfo.Parameters.ItemStoreLevel);
         }
 
         private void mnuShowAll_Click(object sender, EventArgs e)
         {
-            //SwitchLevel(base.Instance.Parameter);
-            base.Instance.SelectedItem.Clear();
-            RefreshGrid(true);
+            SwitchLevel(base.Instance.Parameter);
         }
         
 		private void mnuReviewAppAllocation_Click(object sender, EventArgs e)
@@ -1742,7 +727,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                         });
 
                     _bwSearch.RunWorkerCompleted += ((sender, e) =>
-                    {                        
+                    {
                         viewLevers.Columns.Clear();
                         gridLevers.DataSource = data;
                         viewLevers.OptionsBehavior.Editable = this.EditMode;
@@ -1765,8 +750,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                         gridLevers.Visible = true;
 
                         RefreshButtons();
-
-                        base.ExitAllowed = true;
+                        _allowExit = true;
                         base.IsDirty = false;
                         this.Cursor = Cursors.Default;
 
@@ -1789,13 +773,13 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 						base.SaveLayout(this.viewLevers, kGridRegistryKey + ((DetailedWorkbenchInfo.Parameters)previousParameter).ToString());
 				}
 
-                base.ExitAllowed = false;
+                _allowExit = false;
                 _bwSearch.RunWorkerAsync();
                 
             }
             catch (Exception ex)
             {
-                base.ExitAllowed = true;
+                _allowExit = true;
                 this.Cursor = Cursors.Default;
                 ErrorDialog.Show(ex, "RefreshGrid");
             }
@@ -1836,9 +820,8 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                 && viewLevers.FocusedRowHandle != GridControl.NewItemRowHandle
                 && !viewLevers.IsGroupRow(viewLevers.FocusedRowHandle);
 
-            //mnuStyle.Enabled = mnuItem.Enabled && base.Instance.IsStyleAvailable;
-            mnuItem.Enabled = true;
-            mnuShowAll.Enabled = true;
+            mnuItem.Enabled = mnuStyle.Enabled;
+            mnuShowAll.Enabled = mnuStyle.Enabled;
             mnuReviewAppAllocation.Enabled = this.EditMode && IsPackItem();
             mnuExport.Enabled = viewLevers.RowCount > 0;
 
@@ -1889,113 +872,86 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
             }
         }
 
-        private bool GetNewCellValue(string lever, object cellValue, out object newCellValue, bool isValid = true, string errorText = "")
+        private void UpdateCells(string lever, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e, bool isValid = true, string errorText = "")
         {
-            bool result = false;
-            
-            _updatingCells = true;
-            newCellValue = null;
-
-            var atThislevelFieldname = lever + "THISLEVEL";
-            var statusFieldname = lever + "STATUS";
-            var hierarchyLevelFieldname = lever + "HIERARCHYLEVEL";
-            var atThislevelValue = (viewLevers.GetFocusedRowCellValue(atThislevelFieldname) ?? "N").ToString();
-            var statusValue = viewLevers.GetFocusedRowCellValue(statusFieldname).ToString();
+			var atThislevelFieldname = lever + "THISLEVEL";
+			var statusFieldname = lever + "STATUS";
+			var hierarchyLevelFieldname = lever + "HIERARCHYLEVEL";
+			var atThislevelValue = (viewLevers.GetFocusedRowCellValue(atThislevelFieldname) ?? "N").ToString();
+			var statusValue = viewLevers.GetFocusedRowCellValue(statusFieldname).ToString();
 
             try
             {
                 if (atThislevelValue == string.Empty)
-                {
                     atThislevelValue = "N";
-                }
 
                 // Has user has blanked out/deleted cell contents?
-                if (cellValue == null || cellValue.ToString().Trim() == string.Empty)
-                {                  
+                if (e.Value == null || e.Value.ToString().Trim() == string.Empty)
+                {
                     // Get the inherited value for the cell
                     var inherittedValue = base.Instance.GetInherittedValue(viewLevers.GetFocusedDataRow(), base.Instance.Parameter);
                     if (inherittedValue.Exists)
                     {
-                        // Indicate we have deleted the 'actual' value for the cell
-                        if (statusValue == DetailedWorkbenchInfo.kStatusAdded || atThislevelValue == "N")
-                        {
-                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusUnchanged);
-                            result = true;
-                        }
-                        else
-                        {
-                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusDeleted);
-                            result = true;
-                        }
-
-                        if (viewLevers.IsLastRow || viewLevers.IsLastVisibleRow)
-                        {
-                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusDeleted);
-                            result = true;
-                        }
-
-                        // Set 'at this level' flag to 'N' to indicate the value will be inheritted.
-                        viewLevers.SetFocusedRowCellValue(atThislevelFieldname, "N");
-                        result = true;
-
                         switch (viewLevers.FocusedColumn.FieldName)
                         {
                             case DetailedWorkbenchInfo.colNewAllocFlag:
-                                newCellValue = inherittedValue.AllocationLever.Value;
-                                viewLevers.SetFocusedRowCellValue("NEWALLOCFLAG", newCellValue.ToString());
+                                e.Value = inherittedValue.AllocationLever.Value;
                                 viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, inherittedValue.AllocationLever.HierarchyLevel);
-                                result = true;
                                 break;
 
                             case DetailedWorkbenchInfo.colNewCutOff:
-                                newCellValue = inherittedValue.CutOffLever.Value;
+                                e.Value = inherittedValue.CutOffLever.Value;
                                 viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, inherittedValue.CutOffLever.HierarchyLevel);
-                                result = true;
                                 break;
 
                             case DetailedWorkbenchInfo.colNewPattern:
-                                newCellValue = inherittedValue.PatternLever.Value;
+                                e.Value = inherittedValue.PatternLever.Value;
                                 viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, inherittedValue.PatternLever.HierarchyLevel);
-                                result = true;
                                 break;
 
                             case DetailedWorkbenchInfo.colNewSmoothingFactor:
-                                newCellValue = inherittedValue.SmoothingLever.Value;
+                                e.Value = inherittedValue.SmoothingLever.Value;
                                 viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, inherittedValue.SmoothingLever.HierarchyLevel);
-                                result = true;
                                 break;
 
                             case DetailedWorkbenchInfo.colNewUpliftFactor:
-                                newCellValue = inherittedValue.UpliftLever.Value;
+                                e.Value = inherittedValue.UpliftLever.Value;
                                 viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, inherittedValue.UpliftLever.HierarchyLevel);
-                                result = true;
                                 break;
                         }
+
+                        // Indicate we have deleted the 'actual' value for the cell
+                        if (statusValue == DetailedWorkbenchInfo.kStatusAdded || atThislevelValue == "N")
+                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusUnchanged);
+                        else
+                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusDeleted);
+
+                        // Set 'at this level' flag to 'N' to indicate the value will be inheritted.
+                        viewLevers.SetFocusedRowCellValue(atThislevelFieldname, "N");
                     }
                 }
                 else if (isValid)
                 {
                     //if (oldValue != currentValue || viewLevers.ActiveEditor.ForeColor.Name == "ff000000") ;
-
-                    // If the cell was previously 'not at this level', i.e. inheritted then indicate we are adding a new value
-                    // otherwise indicate we are changing a value at this level
-                    if (atThislevelValue == "N")
+                    if (_cellChanging == true)
                     {
-                        viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusAdded);
-                    }
-                    else if (statusValue != DetailedWorkbenchInfo.kStatusAdded)
-                    {
-                        viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusChanged);
-                    }
+                        // If the cell was previously 'not at this level', i.e. inheritted then indicate we are adding a new value
+                        // otherwise indicate we are changing a value at this level
+                        if (atThislevelValue == "N")
+                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusAdded);
+                        else if (statusValue != DetailedWorkbenchInfo.kStatusAdded)
+                            viewLevers.SetFocusedRowCellValue(statusFieldname, DetailedWorkbenchInfo.kStatusChanged);
 
-                    // Set the lever to 'at this level' and update the hierarchy value
-                    viewLevers.SetFocusedRowCellValue(atThislevelFieldname, "Y");
-                    viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, base.Instance.Parameter);
+                        // Set the lever to 'at this level' and update the hierarchy value
+                        viewLevers.SetFocusedRowCellValue(atThislevelFieldname, "Y");
+
+                        viewLevers.SetFocusedRowCellValue(hierarchyLevelFieldname, base.Instance.Parameter);
+                    }
                 }
                 else
                 {
-                    isValid = false;
-                    //errorText = errorText;
+                    e.Valid = false;
+                    e.ErrorText = errorText;
                 }
             }
             catch (Exception)
@@ -2004,11 +960,8 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
             }
             finally
             {
-                viewLevers.SetFocusedRowCellValue(statusFieldname, viewLevers.GetFocusedRowCellValue(statusFieldname));
-                _updatingCells = false;
-                result = true;
+                _cellChanging = false;
             }
-            return (result);
         }
 
         private void SetupColumns()
@@ -2032,7 +985,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                 col.OptionsColumn.AllowEdit = false;
                 col.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 				col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;			
-                
+
                 switch (col.FieldName.ToUpper())
                 {
                     case DetailedWorkbenchInfo.colItem:
@@ -2539,26 +1492,55 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
         private void SwitchLevel(DetailedWorkbenchInfo.Parameters newParameter)
         {
-            lock (this)
-            {
-                base.UpdateStatusMessage("Switching level...");
+            var switchLevel = false;
 
-                try
+            if (IsDirty)
+                switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
                 {
-                    // Get rid of any existing locks
-                    base.Instance.ReleaseLocks();
+                    case System.Windows.Forms.DialogResult.Yes:
+                        base.Instance._giveItBackChanged = _giveItBackChanged;
+                        switchLevel = base.Instance.ApplyChanges();
+                        _giveItBackChanged = false;
+                        base.Instance._giveItBackChanged = false;
+                        
+                        break;
 
-                    var curParameter = base.Instance.Parameter;
-                    if (base.Instance.Parameter.ToString().ToLower().Contains("style") || newParameter.ToString().ToLower().Contains("style"))
-                        base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)));
-                    else
-                        base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colColour)),
-                        Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colSize)));
+                    case System.Windows.Forms.DialogResult.No:
+                        base.Instance.DiscardChanges();
+                        switchLevel = true;
+                        break;
+
+                    case System.Windows.Forms.DialogResult.Cancel:
+                        switchLevel = false;
+                        break;
+                }
+            else
+                switchLevel = true;
+
+            if (switchLevel)
+            {
+				// Get rid of any existing locks
+				base.Instance.ReleaseLocks();
+				
+				// not switching levels, just showing all values for this level as originally selected.
+				if (base.Instance.Parameter == newParameter)
+				{
+					base.Instance.SelectedItem.Clear();
+					RefreshGrid(true);
+				}
+				else
+				{
+					var curParameter = base.Instance.Parameter;
+					if (base.Instance.Parameter.ToString().ToLower().Contains("style") || newParameter.ToString().ToLower().Contains("style"))
+						base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)));
+					else
+						base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colColour)),
+						Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colSize)));
 
                     base.Instance.SelectedItem.SetGradeId(null);
                     base.Instance.SelectedItem.SetMarket(null);
@@ -2612,166 +1594,29 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     }
 
                     base.Instance.PreviousParameter = curParameter;
-                    base.Instance.Parameter = newParameter;
-                    //RefreshGrid(true, curParameter);
-                }
-                catch (Exception exc)
-                {
-                } 
-            }    
+					base.Instance.Parameter = newParameter;
+					RefreshGrid(true, curParameter);
+				}
+            }
         }
-
-        //private void SwitchLevel(DetailedWorkbenchInfo.Parameters newParameter)
-        //{
-        //    var switchLevel = false;
-
-        //    if (IsDirty)
-        //        switch (Question.YesNoCancel("Changes have been made to these items, save them before switching levels", this.Text))
-        //        {
-        //            case System.Windows.Forms.DialogResult.Yes:
-        //                base.Instance._giveItBackChanged = _giveItBackChanged;
-        //                switchLevel = base.Instance.ApplyChanges();
-        //                _giveItBackChanged = false;
-        //                base.Instance._giveItBackChanged = false;
-
-        //                break;
-
-        //            case System.Windows.Forms.DialogResult.No:
-
-        //                base.Instance.DiscardChanges();
-                        
-        //                switchLevel = true;
-        //                break;
-
-        //            case System.Windows.Forms.DialogResult.Cancel:
-        //                switchLevel = false;
-        //                break;
-        //        }
-        //    else
-        //        switchLevel = true;
-
-        //    if (switchLevel)
-        //    {
-        //        // Get rid of any existing locks
-        //        base.Instance.ReleaseLocks();
-				
-        //        // not switching levels, just showing all values for this level as originally selected.
-        //        if (base.Instance.Parameter == newParameter)
-        //        {
-        //            base.Instance.SelectedItem.Clear();
-        //            RefreshGrid(true);
-        //        }
-        //        else
-        //        {
-        //            var curParameter = base.Instance.Parameter;
-        //            if (base.Instance.Parameter.ToString().ToLower().Contains("style") || newParameter.ToString().ToLower().Contains("style"))
-        //                base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)));
-        //            else
-        //                base.Instance.SelectedItem.SetItem(Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colClass)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colVendor)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStyle)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colColour)),
-        //                Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colSize)));
-
-        //            base.Instance.SelectedItem.SetGradeId(null);
-        //            base.Instance.SelectedItem.SetMarket(null);
-        //            base.Instance.SelectedItem.SetStoreId(null);
-
-        //            var storeId = Convert.ToDecimal(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colStore));
-
-        //            switch (curParameter)
-        //            {
-        //                case DetailedWorkbenchInfo.Parameters.ItemMarketLevel:
-        //                case DetailedWorkbenchInfo.Parameters.StyleMarketLevel:
-        //                    if (newParameter == DetailedWorkbenchInfo.Parameters.ItemLevel || newParameter == DetailedWorkbenchInfo.Parameters.StyleLevel)
-        //                        base.Instance.Promotions.Clear();
-        //                    else
-        //                        base.Instance.SelectedItem.SetMarket(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colMarket));
-        //                    break;
-
-        //                case DetailedWorkbenchInfo.Parameters.ItemGradeLevel:
-        //                case DetailedWorkbenchInfo.Parameters.StyleGradeLevel:
-        //                    if (newParameter == DetailedWorkbenchInfo.Parameters.ItemLevel || newParameter == DetailedWorkbenchInfo.Parameters.StyleLevel)
-        //                        base.Instance.Promotions.Clear();
-        //                    else
-        //                        base.Instance.SelectedItem.SetGradeId(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colGrade));
-        //                    break;
-
-        //                case DetailedWorkbenchInfo.Parameters.ItemStoreLevel:
-        //                case DetailedWorkbenchInfo.Parameters.StyleStoreLevel:
-        //                    switch (newParameter)
-        //                    {
-        //                        case DetailedWorkbenchInfo.Parameters.ItemLevel:
-        //                        case DetailedWorkbenchInfo.Parameters.StyleLevel:
-        //                            base.Instance.Promotions.Clear();
-        //                            break;
-
-        //                        case DetailedWorkbenchInfo.Parameters.ItemMarketLevel:
-        //                        case DetailedWorkbenchInfo.Parameters.StyleMarketLevel:
-        //                            base.Instance.SelectedItem.SetMarket(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colMarket));
-        //                            break;
-
-        //                        case DetailedWorkbenchInfo.Parameters.ItemGradeLevel:
-        //                        case DetailedWorkbenchInfo.Parameters.StyleGradeLevel:
-        //                            base.Instance.SelectedItem.SetGradeId(viewLevers.GetFocusedRowCellDisplayText(DetailedWorkbenchInfo.colGrade));
-        //                            break;
-
-        //                        case DetailedWorkbenchInfo.Parameters.ItemStoreLevel:
-        //                        case DetailedWorkbenchInfo.Parameters.StyleStoreLevel:
-        //                            base.Instance.SelectedItem.SetStoreId(storeId);
-        //                            break;
-        //                    }
-        //                    break;
-        //            }
-
-        //            base.Instance.PreviousParameter = curParameter;
-        //            base.Instance.Parameter = newParameter;
-        //            RefreshGrid(true, curParameter);
-        //        }
-        //    }
-        //}
 
         private void viewLevers_RowCellClick(object sender, RowCellClickEventArgs e)
         {
         }
 
         private void viewLevers_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
-        {            
+        {
+            
         }
 
         private void viewLevers_CellValueChanging(object sender, CellValueChangedEventArgs e)
-        {           
-            _cellsChanging = true;
+        {
+            _cellChanging = true;
 
             if (e.Column.Name == "colGIVEITBACK")
             {
                 _giveItBackChanged = true;
-            }            
-        }
-
-        //private void WriteText(string msg)
-        //{
-        //    string path = @"c:\MySRRLog.txt";
-        //    if (!File.Exists(path))
-        //    {
-        //        // Create a file to write to.
-        //        using (StreamWriter sw = File.CreateText(path))
-        //        {
-        //            sw.WriteLine("Hello And Welcome");
-        //        }
-        //    }
-
-        //    using (StreamWriter sw = File.AppendText(path))
-        //    {
-        //        sw.WriteLine(msg);
-        //    }
-        //}
-
-        private void gridLevers_ProcessGridKey(object sender, KeyEventArgs e)
-        {
-            _cellsChanging = true;
+            }                
         }
 
         

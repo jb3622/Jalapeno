@@ -25,32 +25,6 @@ namespace Disney.iDash.LocalData
 
         public static Exception LastException { get; private set; }
 
-        private static volatile int _busyCount = 0;
-        /// <summary>
-        /// IsBusy is used to prevent the system exiting if background or length processes
-        /// are running.  The counter allows for multiple processes to set/reset the flag
-        /// and only when _busyCount = 0 is the system able to exit.
-        /// </summary>
-        public static bool IsBusy
-        {
-            get
-            {
-                return _busyCount != 0;
-            }
-            set
-            {
-                if (value)
-                    _busyCount++;
-                else
-                {
-                    _busyCount--;
-                    if (_busyCount < 0)
-                        _busyCount = 0;
-                }
-            }
-        }
-
-
         public static void ClearException()
         {
             LastException = null;

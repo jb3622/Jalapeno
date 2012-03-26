@@ -458,7 +458,6 @@ namespace Disney.iDash.SRR.BusinessLayer
         public bool ApplyChanges()
         {
             var result = false;
-            Session.IsBusy = true;
 
             if (Factory.OpenConnection())
                 try
@@ -480,7 +479,7 @@ namespace Disney.iDash.SRR.BusinessLayer
                     if (cmd.Parameters["perr"].Value == System.DBNull.Value || cmd.Parameters["perr"].Value.ToString() == string.Empty)
                     {
                         result = true;
-                        IsDirty = false;
+
                         WeeklyFilegroup = 0;
                         DailyFilegroup = 0;
                     }
@@ -498,7 +497,6 @@ namespace Disney.iDash.SRR.BusinessLayer
                     Factory.CloseConnection();
                 }
 
-            Session.IsBusy = false;
             return result;
         }
 
@@ -509,7 +507,6 @@ namespace Disney.iDash.SRR.BusinessLayer
         public bool RunModel()
         {
             var result = false;
-            Session.IsBusy = true;
 
             if (Factory.OpenConnection())
                 try
@@ -547,7 +544,7 @@ namespace Disney.iDash.SRR.BusinessLayer
                 {
                     Factory.CloseConnection();
                 }
-            Session.IsBusy = false;
+
             return result;
         }
 

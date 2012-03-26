@@ -18,7 +18,7 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
-    <PublishUrl>\\sm-gblo-vtds05\srr\ITG\</PublishUrl>
+    <PublishUrl>\\sm-gblo-vtds07\srr\test\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,13 +28,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://sm-gblo-vtds05.emea.wdpr.disney.com/srr/ITG/</InstallUrl>
+    <InstallUrl>http://sm-gblo-vtds05.emea.wdpr.disney.com/srr/test/</InstallUrl>
     <ProductName>SRR</ProductName>
     <PublisherName>Walt Disney International</PublisherName>
     <SuiteName>iDash</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>29</ApplicationRevision>
-    <ApplicationVersion>2.18.1.29</ApplicationVersion>
+    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationVersion>2.18.1.30</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -179,10 +179,6 @@
     <Reference Include="Disney.iDash.SRR.UI, Version=2.16.1109.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Release\Disney.iDash.SRR.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="SkinProject1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Documents and Settings\Jbrown\My Documents\My DXSkins\SkinProject1\SkinProject1.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

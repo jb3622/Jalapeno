@@ -191,24 +191,11 @@ namespace Disney.iDash.SRR.BusinessLayer
 		public const string kStatusAdded = "A";
 		public const string kStatusUnchanged = "U";
 
-        private decimal _departmentId = -1;
-
         public Stages Stage { get; set; }
         public string ErrorMessage { get; private set; }
         public decimal DailyFilegroup { get; private set; }
         public decimal WeeklyFilegroup { get; private set; }
-        public decimal DepartmentId {
-            get { return _departmentId; }
-            
-            set
-            {
-                _departmentId = value;
-                IsStyleAvailable = (Factory.GetValue("DSSRSTY", "DSACTV", "DSDEPT=" + _departmentId.ToString(), "N").ToString() == "Y");
-            }
-        }
-
-        public bool IsStyleAvailable { get; private set; }
-
+        public decimal DepartmentId { get; set; }
         public string DepartmentText { get; set; }
         public Constants.Workbenches Workbench { get; set; }
 		public Constants.StoreTypes StoreType { get; set; }
@@ -730,29 +717,23 @@ namespace Disney.iDash.SRR.BusinessLayer
 
         /// <summary>
         ///  Save any changes made to the model.
-        ///  Note: useTransactions must be set False when run in multi-threaded mode
         /// </summary>
-        /// <param name="useTransactions"></param>
         /// <returns></returns>
-        public bool ApplyChanges(bool useTransactions = false)
+        public bool ApplyChanges()
         {
-            return RunModel(true, useTransactions);
+            return RunModel(true);
         }
 
         /// <summary>
         /// Run the model and update the source table with the results.
-        /// Note: useTransactions must be set False when run in multi-threaded mode
         /// </summary>
         /// <param name="applyChanges"></param>
-        /// <param name="useTransactions"></param>
         /// <returns></returns>
-        public bool RunModel(bool applyChanges = false, bool useTransactions = false)
+        public bool RunModel(bool applyChanges = false)
         {
             var runCompleted = true;
 			var dailyChanges = 0;
 			var weeklyChanges = 0;
-
-            Session.IsBusy = true;
 
 			if (this.WeeklyFilegroup != 0)
 				weeklyChanges = RunModelCountChanges(Constants.Workbenches.Weekly);
@@ -764,10 +745,7 @@ namespace Disney.iDash.SRR.BusinessLayer
             {
                 if (Factory.OpenConnection())
                 {
-                    OleDbTransaction tran = null;
-					if (useTransactions)
-                        tran = Factory.BeginTransaction();
-
+                    var tran = Factory.BeginTransaction();
                     var error = string.Empty;
                     try
                     {
@@ -820,8 +798,7 @@ namespace Disney.iDash.SRR.BusinessLayer
 
                             if (error == string.Empty)
                             {
-                                if (tran != null && tran.Connection != null)
-                                    tran.Commit();
+                                tran.Commit();
 
                                 _giveItBackItems.Clear();
 

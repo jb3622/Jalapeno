@@ -210,7 +210,7 @@ namespace Disney.iDash.SPICE.Forms.Common
 				switch (ConfirmQuit())
 				{
 					case System.Windows.Forms.DialogResult.Yes:
-						if (this.Instance.ApplyChanges(true))
+						if (this.Instance.ApplyChanges())
 						{
 							this.IsDirty = false;
 							proceed = true;
@@ -247,7 +247,7 @@ namespace Disney.iDash.SPICE.Forms.Common
                     switch (ConfirmQuit())
                     {
                         case System.Windows.Forms.DialogResult.Yes:
-                            if (this.Instance.ApplyChanges(true))
+                            if (this.Instance.ApplyChanges())
                                 this.IsDirty = false;
                             else
                                 e.Cancel = true;

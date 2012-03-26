@@ -206,7 +206,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rEGQqwqQ6UqhgcUN0SXfK7G9gHs=</dsig:DigestValue>
+        <dsig:DigestValue>mvybYZNnjXuJ2BaUmUvZw9vQwV0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -218,7 +218,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>z9wHsHf31p5FAzKnYcvVCjfvf0I=</dsig:DigestValue>
+        <dsig:DigestValue>Dv83K1iyWjAyGSPc2PvUB1RDXvU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -230,7 +230,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XTDgyikIV8tePCvER+C/N7J+sJk=</dsig:DigestValue>
+        <dsig:DigestValue>my6Q+0spGlWUCDcEG3LnsaipBAg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -242,7 +242,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>TJXp15Sux476sr38GMi8kVAzPr8=</dsig:DigestValue>
+        <dsig:DigestValue>e/fu+K3iYCtWHDPu40wQ9vV56gc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -259,50 +259,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Disney.iDash.SRR.BusinessLayer.dll" size="230400">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Disney.iDash.SRR.BusinessLayer.dll" size="228864">
       <assemblyIdentity name="Disney.iDash.SRR.BusinessLayer" version="2.16.1109.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>3fbO+TKZzP70qdZn69Y5FzUnB4s=</dsig:DigestValue>
+        <dsig:DigestValue>PXs1dvTrFqGzv4lJlrU/gfkmEHs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Disney.iDash.SRR.UI.dll" size="647168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Disney.iDash.SRR.UI.dll" size="629760">
       <assemblyIdentity name="Disney.iDash.SRR.UI" version="2.16.1109.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>vwZAGdkpVZGgTjrV1s2PZyP7vMc=</dsig:DigestValue>
+        <dsig:DigestValue>9du902dptYvUYkmh8yq/QyQ0oZE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iDash.exe" size="18432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iDash.exe" size="17920">
       <assemblyIdentity name="iDash" version="2.16.1109.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>b81++iXNLZVDEoTy7e3LlpRx95s=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SkinProject1.dll" size="495616">
-      <assemblyIdentity name="SkinProject1" version="11.1.6.0" publicKeyToken="95FC6C5621878F0A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>wKHYYQAMCuzbYgRinnaqQ6Tw7UI=</dsig:DigestValue>
+        <dsig:DigestValue>C+CrpUl41bXjLDMjholt4h9kCPE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -327,13 +315,13 @@
       <dsig:DigestValue>/UdSHBCG22OLTHpTLE/ATUF/qc8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="iDash.exe.config" size="4728">
+  <file name="iDash.exe.config" size="4738">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>54lklFtUFRNQjzCZ5xdgjw6VI4Y=</dsig:DigestValue>
+      <dsig:DigestValue>EavJA/dOwOb1L7weRBW3N8eyLsQ=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

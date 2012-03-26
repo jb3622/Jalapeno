@@ -141,9 +141,9 @@ namespace Disney.iDash.SPICE.Forms
                     if (!IsLoading)
                     {
                         IsLoading = true;
-                        var frm = new Forms.ItemManagement.MarketSelection();
+                        var frm = new Forms.ItemManagement.NewItemForm();
                         frm.Tag = rpSpice.Text;
-                        frm.ShowDialog();
+                        frm.ShowDetailedForm();
                         IsLoading = false;
                     }
                     break;

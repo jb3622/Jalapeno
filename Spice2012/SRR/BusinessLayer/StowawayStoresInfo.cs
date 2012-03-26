@@ -92,35 +92,19 @@ namespace Disney.iDash.SRR.BusinessLayer
 							var existingStoreId = (decimal)row[colStoreId];
 							var curRingFenced = (decimal)row[colNewRingFenced];
 							var newRingFenced = (decimal)row[colNewRingFenced];
-                            decimal giveBack = voidQty + releaseQty;
 
-                            // "GIVE BACK" records
-                            //if (voidQty != 0)
-                            if (giveBack > 0)
-                            {
-                                //WriteRow(cmd, row, 'V', voidQty, existingStoreId);
-                                WriteRow(cmd, row, 'V', giveBack, StoreId);
-                            }
+							if (voidQty != 0)
+								WriteRow(cmd, row, 'V', voidQty, existingStoreId);
 
-                            // "STOWAWAY" records
-							if (releaseQty > 0)
+							if (releaseQty != 0)
 							{
-                                WriteRow(cmd, row, 'C', releaseQty, storeId);
-                                // All "STOWAWAY" records should always have an associated "GIVE BACK DETAIL" record, so this 
-                                // amount can be voided FIRST
-                                WriteRow(cmd, row, 'V', releaseQty, StoreId);
-                                //if (storeId != existingStoreId)
-                                //{
-                                //    WriteRow(cmd, row, 'V', releaseQty, existingStoreId);
-                                //}
-                                //else
-                                //{
-                                //    WriteRow(cmd, row, 'R', releaseQty, storeId);
-                                //}
+								WriteRow(cmd, row, 'C', releaseQty, storeId);
+								if (storeId != existingStoreId)
+									WriteRow(cmd, row, 'V', releaseQty, existingStoreId);
 							}
 
-                            //if (newRingFenced != 0 && newRingFenced != curRingFenced)
-                            //    WriteRow(cmd, row, 'R', newRingFenced, storeId);
+							if (newRingFenced != 0 && newRingFenced != curRingFenced)
+								WriteRow(cmd, row, 'R', newRingFenced, storeId);
 						}
 
 						Factory.SubmitDSIPWRAP("S886QC0001", "DS886PC", cmd.Parameters["P_MBR"].Value.ToString(), string.Empty, 'N');

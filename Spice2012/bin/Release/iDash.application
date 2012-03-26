@@ -15,14 +15,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="iDash.exe.manifest" size="19477">
+    <dependentAssembly dependencyType="install" codebase="iDash.exe.manifest" size="18817">
       <assemblyIdentity name="iDash.exe" version="2.18.1.29" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4+ZktfrYcI265S5Q5ONJJC1ExgE=</dsig:DigestValue>
+        <dsig:DigestValue>6pHfD4AjbRmX+Gx7VlLCdCz7Q8E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

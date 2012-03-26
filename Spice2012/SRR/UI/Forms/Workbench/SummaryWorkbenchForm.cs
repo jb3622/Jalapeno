@@ -35,6 +35,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         private CellHighlighter _highlights = new CellHighlighter();
         private bool _editMode = false;
 		private bool _clearSortFilterGrouping = true;
+		private bool _allowExit = true;
 
         private Color _colourOverridesBackGround1 = Color.Yellow;
         private Color _colourOverridesBackGround2 = Color.Yellow;
@@ -43,8 +44,6 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         private Color _colourDefaultMarketBackGround1 = Color.LightGray;
 
         private BackgroundWorker _bwSearch = null;
-        private BackgroundWorker _bwApplyChanges = null;
-        private BackgroundWorker _bwRunModel = null;
 
         // private bool _HasClickedWeekly = false;
         // private bool _HasClickedDaily = false;
@@ -54,9 +53,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         public SummaryWorkbenchForm()
         {
             InitializeComponent();
-            #pragma warning disable 618
-            DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true;
-            #pragma warning restore 618
+//			DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true; 
 			
 			riPatternId.DataSource = Instance.GetPatterns;
 
@@ -105,27 +102,16 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
             this.Close();
         }
 
-        private void btnApply_Click(object sender, EventArgs e)        
-        {
-            if (Question.YesNo("Are you sure you want to apply changes to these levers?", "APPLY CHANGES"))
-            {
-                ApplyChanges(dropAlias: false, reset: true, runInBackground: true);	
-            }
-        }
-
         /// <summary>
         /// Saves changes back to AS400
         /// Calls program to apply changes to the lever files
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private bool ApplyChanges(bool dropAlias, bool reset, bool runInBackground)
-        {
-            lock (this)
-            {
-                var ok = false;
-                var buttonState = new ControlStateCollection();
-
+        private void btnApply_Click(object sender, EventArgs e)
+        {            
+			if (Question.YesNo("Are you sure you want to apply changes to these levers?", "APPLY CHANGES"))
+			{
                 viewClass.CloseEditor();
                 viewClass.UpdateCurrentRow();
                 viewClassGrade.CloseEditor();
@@ -143,105 +129,43 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                 viewDeptStore.CloseEditor();
                 viewDeptStore.UpdateCurrentRow();
 
-                buttonState.SaveState(btnEdit, btnCancel, btnApply, btnModelRun, btnExit);
-                buttonState.Disable();
-                this.Cursor = Cursors.WaitCursor;
-                Application.DoEvents();
-                base.ExitAllowed = false;
+				var buttonState = new ControlStateCollection();
+				buttonState.SaveState(btnEdit, btnCancel, btnApply, btnModelRun, btnExit);
+				buttonState.Disable();
+				_allowExit = false;
 
-                if (runInBackground)
+				this.Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+
+                if (_summaryWorkbenchInfo.IsModelRunAvailable())
                 {
-                    if (_bwApplyChanges == null)
+                    var timeStart = System.DateTime.Now;
+                    this.Cursor = Cursors.WaitCursor;
+                    base.UpdateStatusMessage("Applying changes...");
+
+                    if (_summaryWorkbenchInfo.SaveChanges() && _summaryWorkbenchInfo.ApplyChanges())
                     {
-                        _bwApplyChanges = new BackgroundWorker();
-                        _bwApplyChanges.DoWork += ((sender, e) =>
-                        {
-                            if (_summaryWorkbenchInfo.IsModelRunAvailable())
-                            {
-                                var timeStart = System.DateTime.Now;
-                                this.Cursor = Cursors.WaitCursor;
-                                base.UpdateStatusMessage("Applying changes...");
 
-                                if (_summaryWorkbenchInfo.SaveChanges())
-                                    ok = _summaryWorkbenchInfo.ApplyChanges();
-                                else
-                                    UpdateStatusMessage("Failed to save lever changes");
-                            }
-                            else
-                            {
-                                UpdateStatusMessage("The system is still preparing files, model run is not available");
-                            }
+                        tabControl.Visible = false;
+                        ResetDepartmentSelector();
+                        EditMode = false;
 
-                        });
-
-                        _bwApplyChanges.RunWorkerCompleted += ((sender, e) =>
-                        {
-                            buttonState.RestoreState();
-
-                            if (ok)
-                            {
-                                if (dropAlias)
-                                    _summaryWorkbenchInfo.AliasDrop();
-
-                                if (reset)
-                                {
-                                    tabControl.Visible = false;
-                                    ResetForm();
-                                }
-
-                                UpdateStatusMessage("Lever changes have been applied");
-                                EditMode = false;
-                            }
-                            else
-                                UpdateStatusMessage("Failed to apply lever changes");
-
-                            base.ExitAllowed = true;
-                            this.Cursor = Cursors.Default;
-                        });
+                        ResetForm();
+                        UpdateStatusMessage("Lever changes have been applied");
                     }
-
-                    _bwApplyChanges.RunWorkerAsync();
-
+                    else
+                        UpdateStatusMessage("Failed to apply lever changes");
                 }
                 else
                 {
-                    if (_summaryWorkbenchInfo.IsModelRunAvailable())
-                    {
-                        base.UpdateStatusMessage("Applying changes...");
-
-                        if (_summaryWorkbenchInfo.SaveChanges())
-                        {
-                            ok = _summaryWorkbenchInfo.ApplyChanges();
-
-                            if (ok)
-                            {
-                                if (dropAlias)
-                                    _summaryWorkbenchInfo.AliasDrop();
-
-                                if (reset)
-                                {
-                                    tabControl.Visible = false;
-                                    ResetForm();
-                                }
-
-                                UpdateStatusMessage("Lever changes have been applied");
-                                EditMode = false;
-                            }
-                            else
-                                UpdateStatusMessage("Failed to apply lever changes");
-                        }
-                        else
-                            UpdateStatusMessage("Failed to save lever changes");
-                    }
-                    else
-                        UpdateStatusMessage("The system is still preparing files, model run is not available");
-
-                    base.ExitAllowed = true;
-                    this.Cursor = Cursors.Default;
-                    buttonState.RestoreState();
+                    MessageBox.Show("Unable to process your request at this time. The system is still preparing files. Please try again in a few minutes",
+                         "Apply", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                return ok;
-            }
+
+                buttonState.RestoreState();
+                this.Cursor = Cursors.Default;
+				_allowExit = true;
+			}
         }
 
         private void ResetDepartmentSelector()
@@ -253,15 +177,6 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
             SetFileGroup();
         }
 
-        private void btnModelRun_Click(object sender, EventArgs e)
-        {
-            if (Question.YesNo("Commence the Model Run?", "MODEL RUN"))
-            {
-                RunModel(true);
-            }
-        }
-
-
         /// <summary>
         /// Saves changes back to AS400
         /// Calls program to perform a model run
@@ -269,13 +184,10 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RunModel(bool runInBackground = false)
+        private void btnModelRun_Click(object sender, EventArgs e)
         {
-            lock (this)
-            {
-                var ok = false;
-                var buttonState = new ControlStateCollection();
-
+			if (Question.YesNo("Commence the Model Run?", "MODEL RUN"))
+			{
                 viewClass.CloseEditor();
                 viewClass.UpdateCurrentRow();
                 viewClassGrade.CloseEditor();
@@ -293,108 +205,54 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                 viewDeptStore.CloseEditor();
                 viewDeptStore.UpdateCurrentRow();
 
-                buttonState.SaveState(btnEdit, btnCancel, btnApply, btnModelRun, btnExit);
-                buttonState.Disable();
-                base.ExitAllowed = false;
+				var buttonState = new ControlStateCollection();
+				buttonState.SaveState(btnEdit, btnCancel, btnApply, btnModelRun, btnExit);
+				buttonState.Disable();
+				_allowExit = false;
 
-                this.Cursor = Cursors.WaitCursor;
-                Application.DoEvents();
+				this.Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
 
-                if (runInBackground)
-                {
-                    if (_bwRunModel == null)
+				if (_summaryWorkbenchInfo.IsModelRunAvailable())
+				{
+					var timeStart = System.DateTime.Now;
+					this.Cursor = Cursors.WaitCursor;
+					base.UpdateStatusMessage("Running Model...");
+
+                    if (_summaryWorkbenchInfo.SaveChanges() && _summaryWorkbenchInfo.RunModel())
                     {
-                        _bwRunModel = new BackgroundWorker();
-                        _bwRunModel.DoWork += ((sender1, e1) =>
-                        {
-                            if (_summaryWorkbenchInfo.IsModelRunAvailable())
-                            {
-                                this.Cursor = Cursors.WaitCursor;
-                                base.UpdateStatusMessage("Running Model...");
-                                if (_summaryWorkbenchInfo.SaveChanges())
-                                    ok = _summaryWorkbenchInfo.RunModel();
-                                else
-                                    UpdateStatusMessage("Failed to save changes to the model");
-                            }
-                            else
-                                UpdateStatusMessage("The system is still preparing files, model run is not available");
-                        });
+                        gridDept.Visible = false;
+                        gridDept.SuspendLayout();
 
-                        _bwRunModel.RunWorkerCompleted += ((sender1, e1) =>
-                        {
-                            if (ok)
-                            {
-                                gridDept.Visible = false;
-                                gridDept.SuspendLayout();
+                        _summaryWorkbenchInfo.AliasDrop();
+                        _summaryWorkbenchInfo.InitialDataLoad();
+                        _summaryWorkbenchInfo.InitialiseScreen();
 
-                                _summaryWorkbenchInfo.AliasDrop();
-                                _summaryWorkbenchInfo.InitialDataLoad();
-                                _summaryWorkbenchInfo.InitialiseScreen();
+                        ClearAllGrids();
 
-                                ClearAllGrids();
+                        BuildAllGrids();
+                        BuildAllViews();
 
-                                BuildAllGrids();
-                                BuildAllViews();
+                        tabControl.Visible = true;
+                        gridDept.Visible = true;
+                        SetupMenu();
+                        gridDept.ResumeLayout();
 
-                                tabControl.Visible = true;
-                                gridDept.Visible = true;
-                                SetupMenu();
-                                gridDept.ResumeLayout();
+                        RefreshGrid(GetCurrentGrid(), GetCurrentView(), _summaryWorkbenchInfo.SelectedSummaryLevel);
 
-                                RefreshGrid(GetCurrentGrid(), GetCurrentView(), _summaryWorkbenchInfo.SelectedSummaryLevel);
-                            }
-
-                            this.Cursor = Cursors.Default;
-                            buttonState.RestoreState();
-                            base.ExitAllowed = true;
-
-                        });
-                    }
-                    _bwRunModel.RunWorkerAsync();
-                }
-                else
-                {
-                    if (_summaryWorkbenchInfo.IsModelRunAvailable())
-                    {
-                        this.Cursor = Cursors.WaitCursor;
-                        base.UpdateStatusMessage("Running Model...");
-
-                        if (_summaryWorkbenchInfo.SaveChanges())
-                            if (_summaryWorkbenchInfo.RunModel())
-                            {
-                                gridDept.Visible = false;
-                                gridDept.SuspendLayout();
-
-                                _summaryWorkbenchInfo.AliasDrop();
-                                _summaryWorkbenchInfo.InitialDataLoad();
-                                _summaryWorkbenchInfo.InitialiseScreen();
-
-                                ClearAllGrids();
-
-                                BuildAllGrids();
-                                BuildAllViews();
-
-                                tabControl.Visible = true;
-                                gridDept.Visible = true;
-                                SetupMenu();
-                                gridDept.ResumeLayout();
-
-                                RefreshGrid(GetCurrentGrid(), GetCurrentView(), _summaryWorkbenchInfo.SelectedSummaryLevel);
-
-                            }
-                            else
-                                UpdateStatusMessage("Failed to complete model run");
-                        else
-                            UpdateStatusMessage("Failed to save changes to the model");
+                        UpdateStatusMessage(string.Format("Model run time {0:0.0}secs", System.DateTime.Now.Subtract(timeStart).TotalSeconds));
                     }
                     else
-                        UpdateStatusMessage("The system is still preparing files, model run is not available");
+                        UpdateStatusMessage("Failed to complete model run");
+				}
+				else
+					MessageBox.Show("Unable to process your request at this time. The system is still preparing files. Please try again in a few minutes",
+						"Model Run", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                    this.Cursor = Cursors.Default;
-                    buttonState.RestoreState();
-                    base.ExitAllowed = true;
-                }
-            }
+				this.Cursor = Cursors.Default;
+				buttonState.RestoreState();
+				_allowExit = true;
+			}
         }
 
         /// <summary>
@@ -853,19 +711,13 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         private void btnSearchView_Click(object sender, EventArgs e)
         {
             if (DepartmentSelector.DepartmentText != "")
-            {
-                btnSearchView.Enabled = false;
                 Search();
-            }
         }
 
         private void btnSearchEdit_Click(object sender, EventArgs e)
         {
             if (DepartmentSelector.DepartmentText != "")
-            {
-                btnSearchEdit.Enabled = false;
                 Search(true);
-            }
         }
 
         /// <summary>
@@ -1450,11 +1302,11 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                             this.Cursor = Cursors.Default;
                             UpdateStatusMessage(string.Format("Load time {0:0.0}secs", System.DateTime.Now.Subtract(timeStart).TotalSeconds));
                             tabControl.SelectedTabPageIndex = 0; // select Department level
-                            base.ExitAllowed = true;
+                            _allowExit = true;
                         });
                 }
 
-                base.ExitAllowed = false;
+                _allowExit = false;
 	    		_bwSearch.RunWorkerAsync();
 /*
 				_summaryWorkbenchInfo.WorkbenchInitialLoad();
@@ -1480,7 +1332,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 			}
             catch (Exception ex)
             {
-                base.ExitAllowed = true;
+                _allowExit = true; 
                 this.Cursor = Cursors.Default;
                 ErrorDialog.Show(ex, "InitialDataLoad");
             }
@@ -2505,7 +2357,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
         /// <param name="e"></param>
         private void SummaryWorkbench_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (base.ExitAllowed)
+            if (_allowExit)
             {
 
                 if (FormUtils.TagContains(this, "ForceClose"))

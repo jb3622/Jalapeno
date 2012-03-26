@@ -32,7 +32,6 @@ namespace Disney.iDash.SRR.BusinessLayer
             Products,
             Promotions,
             Stores,
-            StoresBAM,
 			StowawayStores,
             StoreGrades,
             StoreGroups           
@@ -53,7 +52,6 @@ namespace Disney.iDash.SRR.BusinessLayer
            {LookupTypes.Products, new LookupSourceInfo(Properties.Resources.SQLLookupProducts, "Id","Description", false, true)},
            {LookupTypes.Promotions, new LookupSourceInfo(Properties.Resources.SQLLookupPromotions, "Id","Description", false, true)},
            {LookupTypes.Stores, new LookupSourceInfo(Properties.Resources.SQLLookupStores,"Id","Description", false, true)},
-           {LookupTypes.StoresBAM, new LookupSourceInfo(Properties.Resources.SQLLookupStoresBAM,"Id","Description", false, true)},
            {LookupTypes.StowawayStores, new LookupSourceInfo(Properties.Resources.SQLLookupStowawayStores,"Id","Description", false, true)},
            {LookupTypes.StoreGrades, new LookupSourceInfo(Properties.Resources.SQLLookupStoreGrades, "Id","Description", false, true)},
            {LookupTypes.StoreGroups, new LookupSourceInfo(Properties.Resources.SQLLookupStoreGroups, "Id","Description", false, true)}

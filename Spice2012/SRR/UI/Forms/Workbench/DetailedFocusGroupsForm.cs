@@ -211,7 +211,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Enabled = true;
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemLevel;
-					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = false;				
@@ -226,7 +226,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemStoreLevel;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = false;
-					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = true;
                     break;
@@ -240,7 +240,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemStoreLevel;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = false;
-                    rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = true;
                     break;
@@ -252,7 +252,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Enabled = false;
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemLevel;
-                    rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = false;	
@@ -265,7 +265,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Enabled = false;
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemLevel;
-                    rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = false;	
@@ -278,7 +278,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
                     chkExcludeItemsWithZeroStock.Enabled = true;
                     chkExcludeItemsWithZeroStock.Checked = true;
 					rgParameter.EditValue = DetailedWorkbenchInfo.Parameters.ItemLevel;
-                    rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = base.Instance.IsStyleAvailable;
+					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.StyleStoreLevel).Enabled = false;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemLevel).Enabled = true;
 					rgParameter.Properties.Items.GetItemByValue(DetailedWorkbenchInfo.Parameters.ItemStoreLevel).Enabled = false;	

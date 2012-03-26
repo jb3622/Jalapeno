@@ -132,11 +132,11 @@ namespace Disney.iDash.Framework.Forms
                     Type typeFound = null;
 
                     foreach (Type type in types)
-                        if (type.BaseType != null && type.BaseType == typeof(AddinMenu))
-                        {
-                            typeFound = type;
-                            break;
-                        }
+                    if (type.BaseType != null && type.BaseType == typeof(AddinMenu))
+                    {
+                       typeFound = type;
+                       break;
+                    }
 
                     if (typeFound != null && dll.GetType(typeFound.FullName).GetMethod("InstallRibbon").Name != null)
                     {
@@ -153,7 +153,6 @@ namespace Disney.iDash.Framework.Forms
                             }
                         }
                     }
-
                 }
                 catch (Exception ex)
                 {

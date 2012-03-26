@@ -31,8 +31,6 @@ namespace Disney.iDash.Startup
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 OfficeSkins.Register();
-                DevExpress.UserSkins.BonusSkins.Register();                
-                DevExpress.Skins.SkinManager.Default.RegisterAssembly(typeof(DevExpress.UserSkins.SkinProject1).Assembly); //Register!
                 DevExpress.Skins.SkinManager.EnableFormSkins();
                 DevExpress.Skins.SkinManager.EnableMdiFormSkins();
 

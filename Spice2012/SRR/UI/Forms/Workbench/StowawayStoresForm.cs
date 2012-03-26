@@ -261,7 +261,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 				ErrorDialog.Show(ex, extraInfo, terminateApplication);
 			});
 
-			riStore.DataSource = lookupSource.GetItems(LookupSource.LookupTypes.StoresBAM);
+			riStore.DataSource = lookupSource.GetItems(LookupSource.LookupTypes.Stores);
 
 			cboDepartment.WhereClause = string.Format("USUSPR = '{0}'", Session.User.NetworkId.ToUpper());
 			cboDepartment.RefreshControl();

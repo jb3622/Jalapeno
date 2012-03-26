@@ -175,12 +175,6 @@
     <Compile Include="Forms\ItemManagement\APP.Designer.cs">
       <DependentUpon>APP.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ItemManagement\MarketSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ItemManagement\MarketSelection.Designer.cs">
-      <DependentUpon>MarketSelection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ItemManagement\NewAPPform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,9 +301,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemManagement\APP.resx">
       <DependentUpon>APP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemManagement\MarketSelection.resx">
-      <DependentUpon>MarketSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemManagement\NewAPPform.resx">
       <DependentUpon>NewAPPform.cs</DependentUpon>

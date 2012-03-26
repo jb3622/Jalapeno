@@ -284,4 +284,3 @@ C:\TEMP\xDev\root\Spice2012\SRR\Spice\obj\Debug\GenerateResource.write.1.tlog
 C:\TEMP\xDev\root\Spice2012\SRR\Spice\obj\Debug\Disney.iDash.SPICE.dll.licenses
 C:\TEMP\xDev\root\Spice2012\SRR\Spice\obj\Debug\Disney.iDash.SPICE.dll
 C:\TEMP\xDev\root\Spice2012\SRR\Spice\obj\Debug\Disney.iDash.SPICE.pdb
-C:\TEMP\xDev\root\Spice2012\SRR\Spice\obj\Debug\Disney.iDash.SPICE.Forms.ItemManagement.MarketSelection.resources

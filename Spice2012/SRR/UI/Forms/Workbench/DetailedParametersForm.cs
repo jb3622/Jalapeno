@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using Disney.iDash.SRR.BusinessLayer;
 using Disney.iDash.Shared;
@@ -80,7 +79,6 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 			if (controlName == DepartmentSelectorControl.ControlNames.Department)
 			{
 				RefreshItemControl();
-                RefreshParameters();
 				btnView.Enabled = base.Instance.DepartmentId > 0;
 				btnEdit.Enabled = btnView.Enabled;
 			}
@@ -92,7 +90,6 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 			if (controlName == DepartmentSelectorControl.ControlNames.Department)
 			{
 				base.Instance.DepartmentId = DepartmentSelector.DepartmentId;
-                RefreshParameters();
 				btnView.Enabled = base.Instance.DepartmentId > 0;
 				btnEdit.Enabled = btnView.Enabled;
 			}
@@ -110,8 +107,7 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
-            btnEdit.Enabled = false;
-			ShowWorkbench(true);            
+			ShowWorkbench(true);
 		}
 
 		private void btnReset_Click(object sender, EventArgs e)
@@ -156,12 +152,6 @@ namespace Disney.iDash.SRR.UI.Forms.Workbench
 
 			this.Cursor = Cursors.Default;
 		}
-
-        private void RefreshParameters()
-        {
-            foreach (var param in DetailedWorkbenchInfo.GetParameters.Where((p) => p.Description.Contains("Style")))
-                rgParameter.Properties.Items.GetItemByValue(param.Parameter).Enabled = base.Instance.IsStyleAvailable;
-        }
 
 		private void RefreshControls()
         {
