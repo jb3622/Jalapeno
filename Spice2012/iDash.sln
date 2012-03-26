@@ -20,6 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer.Spice", "SRR\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice", "SRR\Spice\Spice.csproj", "{75F99035-F53F-423F-82B7-4748AD952A39}"
 EndProject
+
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
