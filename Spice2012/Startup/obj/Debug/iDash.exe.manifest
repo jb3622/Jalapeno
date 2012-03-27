@@ -290,7 +290,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>N8YX4lar1nJ8S7K7xS4onWZ0C+8=</dsig:DigestValue>
+        <dsig:DigestValue>5iehw9cFXU1gcVZ633YpTFf+gzg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -315,13 +315,13 @@
       <dsig:DigestValue>/UdSHBCG22OLTHpTLE/ATUF/qc8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="iDash.exe.config" size="4728">
+  <file name="iDash.exe.config" size="4723">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>54lklFtUFRNQjzCZ5xdgjw6VI4Y=</dsig:DigestValue>
+      <dsig:DigestValue>YW45xf+qFrrOZ0WF9p1YRc86iio=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
