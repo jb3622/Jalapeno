@@ -8,11 +8,11 @@
     <Setting Name="LocalDataFilename" Type="System.String" Scope="Application">
       <Value Profile="(Default)">LocalData.sdf</Value>
     </Setting>
-    <Setting Name="LocalDataPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Projects\iDash\Branches\LDM Changes\LocalData\</Value>
-    </Setting>
     <Setting Name="LocalDataFileVersionRequired" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="LocalDataPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Spice2012\Spice2012\LocalData\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

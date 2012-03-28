@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Disney.iDash.Startup</RootNamespace>
-    <AssemblyName>iDash</AssemblyName>
+    <AssemblyName>iDashv2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -18,7 +18,7 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
-    <PublishUrl>\\sm-gblo-vtds07\srr\test\</PublishUrl>
+    <PublishUrl>\\sm-gblo-vtds05\srr\iDashv2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://sm-gblo-vtds05.emea.wdpr.disney.com/srr/test/</InstallUrl>
+    <InstallUrl>http://sm-gblo-vtds05.emea.wdpr.disney.com/srr/iDashv2/</InstallUrl>
     <ProductName>SRR</ProductName>
     <PublisherName>Walt Disney International</PublisherName>
     <SuiteName>iDash</SuiteName>
