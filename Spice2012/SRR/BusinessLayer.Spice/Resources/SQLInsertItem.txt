@@ -1,0 +1,12 @@
+INSERT INTO DSSPIIA                                               
+(IIADIV,IIADPT,IIACLS,IIAVEN,IIASTY,IIACLR,IIASIZ,IIADES,         
+IIAVUP,IIACPT,                                                    
+IIAMIN,IIAMLT,IIACWG,IIACHT,IIACLN,IIACWI,IIADUP,IIASKU,IIASCD,   
+IIAAPP,IIACLK,IIAPCT,IIAPCQ,                                      
+IIAPDQ,IIAPWG,IIAPHT,IIAPLN,IIAPWI,IIASLC,                                      
+IIAOFE,IIASOC,IIASBO,IIAEID,IIACRD,IIACRT,IIACRU,IIALCD,IIALCT,IIALCU)                                             
+VALUES(5,23,801,71,2013,1,0,'FANT-SC FANTASIA',                    
+0,'E',1,1,1,1,
+1,1,'408018089800',                                   
+0,0,'COM','Y','E',2,0,0,0,0,0,5,0,0,0,0,201028,                    
+145306,'Load_Item',0,0,'JBROWN')
